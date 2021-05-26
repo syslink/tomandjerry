@@ -1,0 +1,42 @@
+@font-face {  
+	font-family: 'GrimshawHandITCStd';   
+	src: url('./GrimshawHandITCStd.otf'); 
+	font-weight: normal;  
+	font-style: normal;  
+}
+/* @font-face {  
+	font-family: 'Bangla';   
+	src: url('./Bangla MN.ttc'); 
+	font-weight: normal;  
+	font-style: normal;  
+} */
+@font-face {  
+	font-family: 'Futura Bk BT Book';   
+	src: url('./Futura Bk BT Book.ttf'); 
+	font-weight: normal;  
+	font-style: normal;  
+}
+@font-face {  
+	font-family: 'Futura Md BT Bold Italic';   
+	src: url('./Futura Md BT Bold Italic.ttf'); 
+	font-weight: normal;  
+	font-style: normal;  
+}
+@font-face {  
+	font-family: 'Futura Md BT Bold';   
+	src: url('./Futura Md BT Bold.ttf'); 
+	font-weight: normal;  
+	font-style: normal;  
+}
+@font-face {  
+	font-family: 'Futura Md BT Medium';   
+	src: url('./Futura Md BT Medium.ttf'); 
+	font-weight: normal;  
+	font-style: normal;  
+}
+@font-face {  
+	font-family: 'SanvitoPro-BoldDisp';   
+	src: url('./SanvitoPro-BoldDisp.otf'); 
+	font-weight: normal;  
+	font-style: normal;  
+}
