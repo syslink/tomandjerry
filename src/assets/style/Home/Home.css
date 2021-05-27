@@ -1,0 +1,238 @@
+.home{
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-top: 90px;
+}
+.div1{
+  width: 100%;
+  height: 400px;
+}
+.div1 img{
+  width: 100%;
+  height: 100%;
+}
+.div2{
+  width: 100%;
+  height: 1336px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  background: pink;
+
+}
+.top{
+  width:calc( 1133px - 120px);
+  height: calc(231px - 70px);
+  background: url(../../img/div2_bg1.png)no-repeat;
+  padding:30px 60px 40px 60px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-top: 74px;
+}
+.top_item{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+.one{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+.mar{
+  margin-bottom: 20px;
+}
+.one :first-child{
+  font-size: 12px;
+  color: #9F786D;
+  font-family: "Futura Bk BT Book";
+}
+.one :last-child{
+  font-size: 20px;
+  color: #532E34;
+  font-family: "Futura Bk BT Book";
+  font-weight: bold;
+  margin-top: 10px;
+}
+.center{
+  width: calc(1133px - 60px);
+  color: #532E34;
+  font-size: 24px;
+  margin-top: 12px;
+  font-family: 'Futura Md BT Bold';  
+}
+.bottom{
+  width: 1133px;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+.bottom img{
+  margin-left: -30px;
+}
+.bottom .out{
+  margin-left: 0;
+}
+.see{
+  width: 261px;
+  height: 78px;
+  font-family: 'Futura Md BT Bold';  
+  color: #532E34;
+  font-size: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: url(../../img/see-more.png)no-repeat;
+}
+.see:hover,.bottom img:hover{
+  cursor: pointer;
+}
+.div3{
+  width: 100%;
+  height: 768px;
+  background: #1B3B29;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+.title{
+  font-size: 36px;
+  color: #E2C993;
+  font-family: "Futura Bk BT Book";
+  margin: 80px 0 19px;
+}
+.small_title{
+  color: #A0CBA3;
+  font-size: 18px;
+  font-family: 'SanvitoPro-BoldDisp';  
+  letter-spacing: 1px;
+}
+.cat_bg{
+  width: 1133px;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  margin-top: 30px;
+}
+.bg1{
+  width: calc(581px - 86px);
+  height: 245px;
+  background: url(../../img/catbg1.png)no-repeat;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding-left: 43px;
+  padding-right: 43px;
+}
+.bg2{
+  width: calc(581px - 86px);
+  height: 245px;
+  background: url(../../img/catbg2.png)no-repeat;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-left: -30px;
+  padding-left: 43px;
+  padding-right: 43px;
+}
+.bg3{
+  width: calc(581px - 86px);
+  height: 245px;
+  background: url(../../img/catbg3.png)no-repeat;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-top: -20px;
+  padding-left: 43px;
+  padding-right: 43px;
+}
+.bg4{
+  width: calc(581px - 86px);
+  height: 245px;
+  background: url(../../img/catbg4.png)no-repeat;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-left: -30px;
+  margin-top: -20px;
+  padding-left: 43px;
+  padding-right: 43px;
+}
+.span1{
+  font-size: 24px;
+  font-family: "Futura Bk BT Book";
+  color: #fff;
+  margin: 51px 0 20px;
+}
+.span2{
+  color: #F3E7C7;
+  font-size: 16px;
+  font-family: "Futura Bk BT Book";
+}
+.div4{
+  width: 100%;
+  height: 257px;
+  background: url(../../img/catbg.png)no-repeat;
+  background-size: cover;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  margin-bottom: 70px;
+}
+.div_left{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+.text{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-top: 20px;
+}
+.text :first-child{
+  font-size: 36px;
+  color: #8A6358;
+  margin-top: 10px;
+  font-family: 'Futura Md BT Bold';  
+}
+.text:last-child{
+  font-size: 16px;
+  color: #8A6358;
+  font-family: "Futura Bk BT Book";
+}
+.right span{
+  font-size: 24px;
+  font-family: "Futura Bk BT Book";
+  color: #8A6358;
+  margin-top: 20px;
+}
