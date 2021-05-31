@@ -5,13 +5,13 @@
       <img src="../../assets/img/TOM_NFT.png" />
     </div>
     <div class="header_right">
-      <router-link to="/" exact style="margin: 0 30px">HOME</router-link>
+      <router-link to="/home" exact style="margin: 0 30px">HOME</router-link>
       <span class="line">/</span>
-      <router-link to="/" exact style="margin: 0 30px"
+      <router-link to="/cats" exact style="margin: 0 30px"
         >NFT Marketplace</router-link
       >
       <span class="line">/</span>
-      <router-link to="/" exact style="margin: 0 30px">Me</router-link>
+      <router-link to="/me" exact style="margin: 0 30px">Me</router-link>
       <span class="line">/</span>
 
       <span class="bns" style="margin-left: 30px; margin-right: 20px">BNS</span>

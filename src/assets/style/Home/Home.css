@@ -22,7 +22,8 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  background: pink;
+  background: url(../../img/div2bg.png)no-repeat;
+  background-size: cover;
 
 }
 .top{
@@ -97,6 +98,11 @@
   justify-content: center;
   align-items: center;
   background: url(../../img/see-more.png)no-repeat;
+}
+.see a{
+  color: #532E34;
+  font-size: 24px;
+  text-decoration: none;
 }
 .see:hover,.bottom img:hover{
   cursor: pointer;

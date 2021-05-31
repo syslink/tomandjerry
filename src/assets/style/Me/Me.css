@@ -1,0 +1,168 @@
+.Me{
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 90px;
+}
+.Me_top{
+  width: 100%;
+  height: 222px;
+  background: url(../../img/Me-bg.png)no-repeat;
+  background-size: cover;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+.top-left{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.left_right{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+.avator{
+  width: 104px;
+  height: 109px;
+  margin-right: 45px;
+  background: url(../../img/avator.png)no-repeat;
+  background-size:cover ;
+  position: relative;
+
+}
+.avator_img{
+  position: absolute;
+  top:4px ;
+  left: 7px;
+  width: 90px;
+  height: 90px;
+  border-radius: 50px;
+}
+.userName{
+  font-size: 36px;
+  color: #E2C993;
+  font-family: 'SanvitoPro-BoldDisp'; 
+}
+.wallet{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 10px 0;
+}
+.wallet img{
+  width: 18px;
+  height: 13px;
+  margin-right: 10px;
+}
+.wallet  span,.address span{
+  font-size: 14px;
+  color: #A0CBA3;
+  font-family: 'Futura Md BT Medium';  
+}
+.address img{
+  width: 16px;
+  height: 22px;
+  margin-right: 10px;
+}
+.edit{
+  width: 136px;
+  height: 36px;
+}
+.Me_center{
+  width: 100%;
+  height: auto;
+  min-height: 415px;
+  background-color: #F3E7C7;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+.nav{
+  width: 1133px;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+.nav_item{
+  padding: 13px 33px;
+  font-size: 24px;
+  color: #1B3B29;
+ 
+  font-family: 'SanvitoPro-BoldDisp'; 
+}
+.nav_item:hover{
+  cursor: pointer;
+}
+.nav_item_avtive{
+  background: #1B3B29;
+  box-shadow: 0px 3px 6px rgba(74, 61, 29, 0.38);
+  opacity: 1;
+  border-radius: 0px 0px 20px 20px;
+  color: #E2C993;
+  
+}
+.lines{
+  width: 2px;
+  height: 20px;
+  background:  #918064;
+  margin:0 20px;
+}
+.nav_box{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+.div4{
+  width: 100%;
+  height: 257px;
+  background: url(../../img/catbg.png)no-repeat;
+  background-size: cover;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  margin-bottom: 70px;
+}
+.div_left{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+.text{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-top: 20px;
+}
+.text :first-child{
+  font-size: 36px;
+  color: #8A6358;
+  margin-top: 10px;
+  font-family: 'Futura Md BT Bold';  
+}
+.text:last-child{
+  font-size: 16px;
+  color: #8A6358;
+  font-family: "Futura Bk BT Book";
+}
+.right span{
+  font-size: 24px;
+  font-family: "Futura Bk BT Book";
+  color: #8A6358;
+  margin-top: 20px;
+}

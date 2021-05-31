@@ -49,7 +49,7 @@
         <img src="../assets/img/cat7.png" alt="cat" />
         <img src="../assets/img/cat8.png" alt="cat" />
       </div>
-      <div class="see">See More</div>
+      <div class="see"><router-link to="/cats">See More</router-link></div>
     </div>
     <div class="div3">
       <div class="title">How To Buy NFT Artworks</div>

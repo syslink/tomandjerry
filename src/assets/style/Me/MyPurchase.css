@@ -1,0 +1,15 @@
+.MyPurchase{
+  width: 1133px;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  margin-top: 30px;
+}
+.MyPurchase img{
+  width: 252px;
+  height: 335px;
+  margin-left: -30px;
+}

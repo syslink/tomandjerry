@@ -1,0 +1,90 @@
+.Cats{
+  width: 100%;
+  height: calc(100% - 210px);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  /* margin-top: 90px; */
+  background: url(../../img/more-bg.png)no-repeat;
+  
+  background-size: 100% 100%;
+  /* background-attachment: fixed; */
+  position: absolute;
+  top: 90px;
+  left: 0;
+  overflow-y: scroll;
+  padding-bottom: 50px;
+}
+.catsbg{
+  margin-top: 48px;
+}
+.cats_text{
+  font-size: 24px;
+  color: #532E34;
+  font-family: 'Futura Md BT Bold'; 
+  width: 1088px; 
+}
+.catsbox{
+  width: 1088px;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+.cats_item{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 260px;
+  margin-right: 16px;
+  margin-bottom: 25px;
+}
+.item_imgs{
+  margin-left: -22px;
+  margin-top: -20px;
+}
+.item_center{
+  width: calc(100% - 30px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 10px 15px;
+  background: #F3E7C7;
+  margin-top: -28px;
+}
+.center_top{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+.center_top_text{
+  font-size: 16px;
+  color: #532E34;
+  font-family: 'Futura Md BT Bold'; 
+}
+.name{
+  color: #4D3034;
+  font-size: 14px;
+  font-family: 'SanvitoPro-BoldDisp';   
+  margin-top: 6px;
+}
+.item_bottom{
+  width: 260px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  min-height: 48px;
+  background: url(../../img/item1-t.png)no-repeat;
+  color: #E2C993;
+  font-size: 16px;
+  font-family: 'Futura Md BT Bold';  
+}
