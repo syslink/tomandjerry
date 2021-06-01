@@ -1,7 +1,7 @@
 <template>
   <div class="footer">
     <div class="flow">
-      <span style="font-size: 16px; color: #ffffff">{{
+      <span style="font-size: 16px; color: #e2c993">{{
         $t("footer.flow")
       }}</span>
       <a href="https://twitter.com/tomtokenfans" target="_blank"

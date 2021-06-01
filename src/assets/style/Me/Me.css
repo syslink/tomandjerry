@@ -77,6 +77,9 @@
   width: 136px;
   height: 36px;
 }
+.edit:hover{
+  cursor: pointer;
+}
 .Me_center{
   width: 100%;
   height: auto;
@@ -165,4 +168,111 @@
   font-family: "Futura Bk BT Book";
   color: #8A6358;
   margin-top: 20px;
+}
+.dialog{
+  width: 524px;
+  height: 471px;
+  background: #F3E7C7;
+  box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.25);
+  opacity: 1;
+  border-radius: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+.dialog_title{
+  width: 376.18px;
+  height: 17.24px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background: url(../../img/dialog_title_bg.png)no-repeat;
+  background-size: cover;
+  font-size: 36px;
+  color: #532E34;
+  font-family: 'SanvitoPro-BoldDisp'; 
+  margin-bottom: 26px;
+}
+.dialog_name{
+  width: 452px;
+  color: #8A6358;
+  font-size: 24px;
+  font-family: 'SanvitoPro-BoldDisp'; 
+  margin: 20px 0;
+}
+.dialog_name_input{
+  width: 452px;
+  height: 52px;
+  background: #F4EDDB;
+  border: 1px solid #C1B6A4;
+  opacity: 1;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.dialog_name_input input{
+  width: 90%;
+  height: 90%;
+  background: #F4EDDB;
+  border: none;
+  outline: none;
+  font-family: 'SanvitoPro-BoldDisp';   
+  color: #532E34;
+  font-size: 16px;
+}
+.dialog_name_textarea{
+  width: 452px;
+  height: 100px;
+  background: #F4EDDB;
+  border: 1px solid #C1B6A4;
+  opacity: 1;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.dialog_name_textarea textarea{
+  width: 90%;
+  height: 90%;
+  background: #F4EDDB;
+  border: 1px solid #C1B6A4;
+  opacity: 1;
+  border-radius: 15px;
+  border: none;
+  outline: none;
+  padding: 10px;
+}
+.btns{
+  width: 452px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 28px;
+}
+.btns span:hover{
+  cursor: pointer;
+}
+.cancel{
+  color: #8A6358;
+  font-size: 24px;
+  font-family: 'SanvitoPro-BoldDisp';   
+  margin-right: 29px;
+}
+.confirm{
+  width: 119px;
+height: 40px;
+background: #8A6358;
+opacity: 1;
+border-radius: 24px;
+text-align: center;
+line-height: 40px;
+color: #E2C993;
+font-size: 24px;
+  font-family: 'SanvitoPro-BoldDisp';   
 }

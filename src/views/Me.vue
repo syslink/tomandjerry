@@ -17,7 +17,11 @@
           </div>
         </div>
       </div>
-      <img src="../assets/img/edit.png" class="edit" />
+      <img
+        src="../assets/img/edit.png"
+        class="edit"
+        @click="centerDialogVisible = true"
+      />
     </div>
     <div class="Me_center">
       <div class="nav">
@@ -69,6 +73,30 @@
         <span>About Us</span>
       </div>
     </div>
+    <el-dialog
+      :visible.sync="centerDialogVisible"
+      width="524px"
+      height="471px"
+      custom-class="dialog"
+      :show-close="show_close"
+      center
+    >
+      <div class="dialog_title">Edit Profile</div>
+      <div class="dialog_name">Name</div>
+      <div class="dialog_name_input">
+        <input type="text" placeholder="Please enter a personal name" />
+      </div>
+      <div class="dialog_name">Brief introduction</div>
+      <div class="dialog_name_textarea">
+        <textarea placeholder="Please enter a personal introduction"></textarea>
+      </div>
+      <div class="btns">
+        <span class="cancel" @click="centerDialogVisible = false">Cancel</span>
+        <span class="confirm" @click="centerDialogVisible = false"
+          >Confirm</span
+        >
+      </div>
+    </el-dialog>
   </div>
 </template>
 <script>
@@ -81,6 +109,8 @@ export default {
   data() {
     return {
       navIndex: 4,
+      centerDialogVisible: false,
+      show_close: false,
     };
   },
   components: { MyPurchase, MySales, MyCreation, ReceiverAddress },

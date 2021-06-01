@@ -7,7 +7,7 @@
     <div class="header_right">
       <router-link to="/home" exact style="margin: 0 30px">HOME</router-link>
       <span class="line">/</span>
-      <router-link to="/cats" exact style="margin: 0 30px"
+      <router-link to="/NFTMarketplace" exact style="margin: 0 30px"
         >NFT Marketplace</router-link
       >
       <span class="line">/</span>
@@ -15,6 +15,7 @@
       <span class="line">/</span>
 
       <span class="bns" style="margin-left: 30px; margin-right: 20px">BNS</span>
+      <span class="bns" style="margin-right: 20px">Airdrop TOM Test COIN</span>
       <span class="bns">Connect to a Wallet</span>
       <img src="../../assets/img/set.png" class="setimg" />
     </div>

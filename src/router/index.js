@@ -27,7 +27,12 @@ const routes = [
         path: '/me',
         name: 'Me',
         component: () => import('../views/Me.vue')
-      }
+      },
+      {
+        path: '/NFTMarketplace',
+        name: 'NFTMarketplace',
+        component: () => import('../views/NFTMarketplace.vue')
+      },
     ]
   }
 ]
