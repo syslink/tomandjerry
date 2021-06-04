@@ -1,7 +1,6 @@
 .Header{
   width: calc(100% - 95px);
-  height: auto;
-  min-height: 90px;
+  height: 90px;
   background: #532E34;
   border-bottom: 5px solid #E2C993;
   display: flex;
@@ -36,7 +35,7 @@
   text-decoration: none;
   font-weight: bold;
 }
-.header_right a :hover,.bns:hover,.setimg:hover{
+.header_right a :hover,.bns:hover,.setimg:hover,.language:hover{
   cursor: pointer;
  
 }
@@ -57,5 +56,16 @@
  
 }
 .setimg{
-  margin-left: 24px;
+  margin-left: 15px;
+}
+.language{
+ 
+  padding: 8px 12px;
+  border: 2px solid #E2C993;
+  opacity: 1;
+  border-radius: 12px;
+  color: #E2C993;
+  font-family: "Futura Bk BT Book";
+  font-size: 20px;
+  margin-left: 15px;
 }

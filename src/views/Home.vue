@@ -39,7 +39,7 @@
         </div>
       </div>
       <div class="center">Hottest Artworks in 2 Weeks</div>
-      <div class="bottom">
+      <!-- <div class="bottom">
         <img src="../assets/img/cat1.png" alt="cat" class="out" />
         <img src="../assets/img/cat2.png" alt="cat" />
         <img src="../assets/img/cat3.png" alt="cat" />
@@ -48,6 +48,96 @@
         <img src="../assets/img/cat6.png" alt="cat" />
         <img src="../assets/img/cat7.png" alt="cat" />
         <img src="../assets/img/cat8.png" alt="cat" />
+      </div> -->
+      <div class="catsbox">
+        <div class="cats_item">
+          <img src="../assets/img/item1.png" class="item_imgs" />
+          <div class="item_center">
+            <div class="center_top">
+              <span class="center_top_text">Crookshacks Cat</span>
+              <img src="../assets/img/lock.png" />
+            </div>
+            <span class="name">Jack Valentine</span>
+          </div>
+          <div class="item_bottom">99 TOM</div>
+        </div>
+        <div class="cats_item">
+          <img src="../assets/img/item2.png" class="item_imgs" />
+          <div class="item_center">
+            <div class="center_top">
+              <span class="center_top_text">Crookshacks Cat</span>
+              <img src="../assets/img/sell.png" />
+            </div>
+            <span class="name">Jack Valentine</span>
+          </div>
+          <div class="item_bottom">99 TOM</div>
+        </div>
+        <div class="cats_item">
+          <img src="../assets/img/item3.png" class="item_imgs" />
+          <div class="item_center">
+            <div class="center_top">
+              <span class="center_top_text">Crookshacks Cat</span>
+              <img src="../assets/img/lock.png" />
+            </div>
+            <span class="name">Jack Valentine</span>
+          </div>
+          <div class="item_bottom">99 TOM</div>
+        </div>
+        <div class="cats_item" style="margin-right: 0">
+          <img src="../assets/img/item4.png" class="item_imgs" />
+          <div class="item_center">
+            <div class="center_top">
+              <span class="center_top_text">Crookshacks Cat</span>
+              <img src="../assets/img/sell.png" />
+            </div>
+            <span class="name">Jack Valentine</span>
+          </div>
+          <div class="item_bottom">99 TOM</div>
+        </div>
+        <div class="cats_item">
+          <img src="../assets/img/item5.png" class="item_imgs" />
+          <div class="item_center">
+            <div class="center_top">
+              <span class="center_top_text">Crookshacks Cat</span>
+              <img src="../assets/img/lock.png" />
+            </div>
+            <span class="name">Jack Valentine</span>
+          </div>
+          <div class="item_bottom">99 TOM</div>
+        </div>
+        <div class="cats_item">
+          <img src="../assets/img/item6.png" class="item_imgs" />
+          <div class="item_center">
+            <div class="center_top">
+              <span class="center_top_text">Crookshacks Cat</span>
+              <img src="../assets/img/sell.png" />
+            </div>
+            <span class="name">Jack Valentine</span>
+          </div>
+          <div class="item_bottom">99 TOM</div>
+        </div>
+        <div class="cats_item">
+          <img src="../assets/img/item7.png" class="item_imgs" />
+          <div class="item_center">
+            <div class="center_top">
+              <span class="center_top_text">Crookshacks Cat</span>
+              <img src="../assets/img/lock.png" />
+            </div>
+            <span class="name">Jack Valentine</span>
+          </div>
+          <div class="item_bottom nocat">Connect to a Wallet</div>
+        </div>
+        <div class="cats_item" style="margin-right: 0">
+          <img src="../assets/img/item8.png" class="item_imgs" />
+          <div class="item_center">
+            <div class="center_top">
+              <span class="center_top_text">Crookshacks Cat</span>
+              <img src="../assets/img/sell.png" />
+            </div>
+            <span class="name">Jack Valentine</span>
+          </div>
+          <div class="item_bottom">99 TOM</div>
+        </div>
       </div>
       <div class="see"><router-link to="/cats">See More</router-link></div>
     </div>

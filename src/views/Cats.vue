@@ -78,7 +78,7 @@
           </div>
           <span class="name">Jack Valentine</span>
         </div>
-        <div class="item_bottom">Connect to a Wallet</div>
+        <div class="item_bottom nocat">Connect to a Wallet</div>
       </div>
       <div class="cats_item" style="margin-right: 0">
         <img src="../assets/img/item8.png" class="item_imgs" />

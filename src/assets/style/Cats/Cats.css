@@ -1,5 +1,6 @@
 .Cats{
   width: 100%;
+ 
   height: calc(100% - 210px);
   display: flex;
   flex-direction: column;
@@ -15,6 +16,7 @@
   left: 0;
   overflow-y: scroll;
   padding-bottom: 50px;
+  min-width:1133px;
 }
 .catsbg{
   margin-top: 48px;
@@ -66,9 +68,10 @@
   width: 100%;
 }
 .center_top_text{
-  font-size: 16px;
+  font-size: 17px;
   color: #532E34;
   font-family: 'Futura Md BT Bold'; 
+  font-weight: bold;
 }
 .name{
   color: #4D3034;
@@ -85,6 +88,9 @@
   min-height: 48px;
   background: url(../../img/item1-t.png)no-repeat;
   color: #E2C993;
-  font-size: 16px;
+  font-size: 20px;
   font-family: 'Futura Md BT Bold';  
+}
+.nocat{
+  background: url(../../img/nocat.png)no-repeat;
 }

@@ -6,6 +6,7 @@
   justify-content: flex-start;
   align-items: center;
   margin-top: 90px;
+  min-width: 1133px;
 }
 .Me_top{
   width: 100%;
