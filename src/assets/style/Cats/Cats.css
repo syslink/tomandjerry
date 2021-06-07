@@ -6,13 +6,13 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  /* margin-top: 90px; */
+  margin-top: 90px;
   background: url(../../img/more-bg.png)no-repeat;
   
   background-size: 100% 100%;
   /* background-attachment: fixed; */
   position: absolute;
-  top: 90px;
+  /* top: 90px; */
   left: 0;
   overflow-y: scroll;
   padding-bottom: 50px;

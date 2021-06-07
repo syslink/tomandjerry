@@ -100,7 +100,7 @@
   align-items: center;
 }
 .nav_item{
-  padding: 13px 33px;
+  padding: 13px 30px;
   font-size: 24px;
   color: #1B3B29;
  
@@ -259,13 +259,13 @@
 .btns span:hover{
   cursor: pointer;
 }
-.cancel{
+.cancel1{
   color: #8A6358;
   font-size: 24px;
   font-family: 'SanvitoPro-BoldDisp';   
   margin-right: 29px;
 }
-.confirm{
+.confirm1{
   width: 119px;
 height: 40px;
 background: #8A6358;

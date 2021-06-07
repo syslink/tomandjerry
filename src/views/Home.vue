@@ -50,7 +50,10 @@
         <img src="../assets/img/cat8.png" alt="cat" />
       </div> -->
       <div class="catsbox">
-        <div class="cats_item">
+        <div
+          class="cats_item"
+          @click="$router.push({ path: '/NFTMarketplace' })"
+        >
           <img src="../assets/img/item1.png" class="item_imgs" />
           <div class="item_center">
             <div class="center_top">

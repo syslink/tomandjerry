@@ -3,7 +3,7 @@
     <img src="../assets/img/imgcatbg.png" class="catsbg" />
     <div class="cats_text">Hottest Artworks in 2 Weeks</div>
     <div class="catsbox">
-      <div class="cats_item">
+      <div class="cats_item" @click="$router.push({ path: '/NFTMarketplace' })">
         <img src="../assets/img/item1.png" class="item_imgs" />
         <div class="item_center">
           <div class="center_top">

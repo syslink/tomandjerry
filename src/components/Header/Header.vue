@@ -7,7 +7,7 @@
     <div class="header_right">
       <router-link to="/home" exact style="margin: 0 10px">HOME</router-link>
       <span class="line">/</span>
-      <router-link to="/NFTMarketplace" exact style="margin: 0 10px"
+      <router-link to="/cats" exact style="margin: 0 10px"
         >NFT Marketplace</router-link
       >
       <span class="line">/</span>

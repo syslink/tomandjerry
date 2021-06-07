@@ -1,0 +1,264 @@
+.PublishNFT{
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+.PublishNFTbg{
+  width: 287.88px;
+  height: 125.43px;
+  background: url(../../img/PublishNFTbg.png)no-repeat;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 70px 0 30px;
+  font-size: 40px;
+  color: #532E34;
+  font-family: 'SanvitoPro-BoldDisp'; 
+}
+.publishNFT_box{
+  width: 820px;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+.ra_box_div2{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+.div2_left_text{
+  font-size: 24px;
+  color: #8A6358;
+  font-family: 'SanvitoPro-BoldDisp'; 
+}
+.select_box2{
+  position: relative;
+  width: 535px;
+  height: 52px;
+  background: #F4EDDB;
+  border: 1px solid #C1B6A4;
+  opacity: 1;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: row;
+  justify-content:center;
+  align-items: center;
+  font-family: 'SanvitoPro-BoldDisp'; 
+  position: relative;
+}
+.input_box{
+  width: 90%;
+  height: 90%;
+  border: none;
+  background: #F4EDDB;
+  outline: none;
+  font-family: 'SanvitoPro-BoldDisp'; 
+  font-size: 18px;
+}
+.uploadimg{
+  position: absolute;
+  right: 18px;
+  top: 14px;
+  width: 24px;
+  height: 24px;
+}
+.redio_box{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+}
+.redio_item{
+  width: calc(257px - 29px);
+  height: 52px;
+  background: #F4EDDB;
+  border: 1px solid #C1B6A4;
+  opacity: 1;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px 0 19px;
+}
+.item_left{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+.item_left span{
+  font-size: 24px;
+  color: #532E34;
+  font-family: 'SanvitoPro-BoldDisp'; 
+  margin-left: 8px;
+}
+.redio_item_one{
+  margin-right: 20px;
+}
+.tag{
+  position: absolute;
+  right: 18px;
+  top: 14px;
+  color: #532E34;
+  font-size: 24px;
+  font-family: 'SanvitoPro-BoldDisp'; 
+}
+.Auction_time{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  width: 535px;
+  height: 52px;
+
+}
+.input_time{
+  width: 60px;
+  height: 52px;
+  background: #F4EDDB;
+  border: none;
+  border: 1px solid #C1B6A4;
+  opacity: 1;
+  border-radius: 15px;
+  text-align: center;
+  line-height: 52px;
+  color: #532E34;
+  font-size: 24px;
+  font-family: 'SanvitoPro-BoldDisp'; 
+  outline: none;
+}
+.tt{
+  margin: 0 10px;
+  color: #532E34;
+  font-size: 24px;
+  font-family: 'SanvitoPro-BoldDisp'; 
+}
+.ttext{
+  margin-right:10px;
+  color: #532E34;
+  font-size: 24px;
+  font-family: 'SanvitoPro-BoldDisp'; 
+}
+.input_time_moouth{
+  width: 115px;
+ height: 52px;
+  background: #F4EDDB;
+  border: none;
+  border: 1px solid #C1B6A4;
+  opacity: 1;
+  border-radius: 15px;
+  text-align: center;
+  line-height: 52px;
+  color: #532E34;
+  font-size: 24px;
+  font-family: 'SanvitoPro-BoldDisp'; 
+  outline: none;
+}
+.addAddress{
+  width: 653px;
+  height: 52px;
+  background: #532E34;
+  opacity: 1;
+  border-radius: 15px;
+  color: #E2C993;
+  text-align: center;
+  line-height: 52px;
+  font-family: 'SanvitoPro-BoldDisp'; 
+  font-size: 30px;
+  margin-top: 60px;
+  margin-bottom: 100px;
+}
+.hahah{
+  width: 515px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  background: #F4EDDB;
+  border: none;
+  border: 1px solid #C1B6A4;
+  opacity: 1;
+  border-radius: 15px;
+  padding: 10px;
+}
+.uploadimg_input{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+.upload_rules{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  font-family: 'SanvitoPro-BoldDisp'; 
+  font-size: 14px;
+  color: #8A6358;
+  line-height: 30px;
+  margin-left: 10px;
+}
+.redio_item:hover,.el-input__inner:hover{
+  cursor: pointer;
+}
+.timer{
+  width: 535px;
+  height: 52px;
+  background: #F4EDDB;
+  border: 1px solid #C1B6A4;
+  opacity: 1;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: row;
+  justify-content:center;
+  align-items: center;
+  font-family: 'SanvitoPro-BoldDisp'; 
+}
+.el-date-editor.el-input, .el-date-editor.el-input__inner{
+  width: 90%;
+  height: 100%;
+  border: none;
+  background: #F4EDDB;
+  outline: none;
+}
+.lala .el-input__inner{
+  background: #F4EDDB;
+  border: none;
+  outline: none;
+  color: #532E34;
+  font-size: 24px;
+  font-family: 'SanvitoPro-BoldDisp';   
+  height: 100%;
+}
+.dada .el-input__inner{
+  background: #F4EDDB;
+  border: none;
+  outline: none;
+  color: #532E34;
+  font-size: 24px;
+  font-family: 'SanvitoPro-BoldDisp';   
+  height: 100%;
+}
+.el-time-panel{
+  width: 480px;
+}
+.el-picker-panel{
+  width: 480px;
+}
+.el-date-picker .el-picker-panel__content {
+  width: 90%;
+}
+
+input::-webkit-input-placeholder{
+  color: #C4B6A2!important;
+}

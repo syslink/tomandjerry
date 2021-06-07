@@ -29,28 +29,35 @@
           class="nav_item"
           :class="{ nav_item_avtive: navIndex == 1 }"
           @click="navIndex = 1"
-          >My Purchase</span
+          >MY PURCHASE</span
         >
         <span class="lines"></span>
         <span
           class="nav_item"
           :class="{ nav_item_avtive: navIndex == 2 }"
           @click="navIndex = 2"
-          >My Sales</span
+          >MY SALES</span
         >
         <span class="lines"></span>
         <span
           class="nav_item"
           :class="{ nav_item_avtive: navIndex == 3 }"
           @click="navIndex = 3"
-          >My Creation</span
+          >MY CREATION</span
         >
         <span class="lines"></span>
         <span
           class="nav_item"
           :class="{ nav_item_avtive: navIndex == 4 }"
           @click="navIndex = 4"
-          >Receiver Address</span
+          >RECEIVER ADDRESS</span
+        >
+        <span class="lines"></span>
+        <span
+          class="nav_item"
+          :class="{ nav_item_avtive: navIndex == 5 }"
+          @click="navIndex = 5"
+          >PUBLISH NFT</span
         >
       </div>
       <div class="nav_box">
@@ -58,6 +65,7 @@
         <MySales v-if="navIndex == 2" />
         <MyCreation v-if="navIndex == 3" />
         <ReceiverAddress v-if="navIndex == 4" />
+        <PublishNFT v-if="navIndex == 5" />
       </div>
     </div>
     <div class="div4">
@@ -91,8 +99,8 @@
         <textarea placeholder="Please enter a personal introduction"></textarea>
       </div>
       <div class="btns">
-        <span class="cancel" @click="centerDialogVisible = false">Cancel</span>
-        <span class="confirm" @click="centerDialogVisible = false"
+        <span class="cancel1" @click="centerDialogVisible = false">Cancel</span>
+        <span class="confirm1" @click="centerDialogVisible = false"
           >Confirm</span
         >
       </div>
@@ -104,16 +112,17 @@ import MyPurchase from "../components/Me/MyPurchase";
 import MySales from "../components/Me/MySales";
 import MyCreation from "../components/Me/MyCreation";
 import ReceiverAddress from "../components/Me/ReceiverAddress";
+import PublishNFT from "../components/Me/PublishNFT";
 export default {
   name: "Me",
   data() {
     return {
-      navIndex: 4,
+      navIndex: 1,
       centerDialogVisible: false,
       show_close: false,
     };
   },
-  components: { MyPurchase, MySales, MyCreation, ReceiverAddress },
+  components: { MyPurchase, MySales, MyCreation, ReceiverAddress, PublishNFT },
   methods: {},
 };
 </script>
