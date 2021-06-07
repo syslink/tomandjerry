@@ -226,14 +226,17 @@ export default {
       this.$message.warning(`当前限制只能上传 1 张图片`);
     },
     beforeAvatarUpload(file) {
-      const isJPG = file.raw.type === "image/jpeg";
-      const isLt2M = file.raw.size / 1024 / 1024 < 2;
+      const isJPG =
+        file.raw.type === "image/jpeg" ||
+        file.raw.type === "image/jpg" ||
+        file.raw.type === "image/gif";
+      const isLt2M = file.raw.size / 1024 / 1024 < 0.48828125;
       if (!isJPG) {
-        this.$message.error("上传图片只能是 JPG 格式!");
+        this.$message.error("上传图片只能是 JPG/JPEG/GIF 格式!");
         this.$refs.upload.clearFiles();
       }
       if (!isLt2M) {
-        this.$message.error("上传图片大小不能超过 2MB!");
+        this.$message.error("上传图片大小不能超过 500KB!");
         this.$refs.upload.clearFiles();
       }
       this.imageUrl = URL.createObjectURL(file.raw);
