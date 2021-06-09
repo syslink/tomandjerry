@@ -1,0 +1,17 @@
+import BigNumber from 'bignumber.js';
+function getReadableNumber(value, assetDecimal, displayDecimal) {
+  let renderValue = new BigNumber(value);
+  renderValue = renderValue.shiftedBy(assetDecimal * -1);
+
+  let decimalPlaces = assetDecimal > 6 ? 6 : assetDecimal;
+  if (renderValue.comparedTo(new BigNumber(0.000001)) < 0) {
+    decimalPlaces = assetDecimal;
+  }
+
+  BigNumber.config({ DECIMAL_PLACES: displayDecimal == null ? decimalPlaces : displayDecimal });
+  renderValue = renderValue.toString(10);
+  return renderValue;
+}
+export {
+  getReadableNumber
+}

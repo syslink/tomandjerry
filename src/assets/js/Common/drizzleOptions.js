@@ -4,6 +4,8 @@ import TradeMarket from "../contracts/TradeMarket.json";
 import TomERC20 from "../contracts/ERC20.json";
 import AirdropTom from "../contracts/AirdropTom.json";
 
+
+
 TomCatNFT.networks['128'] = {address: '0xb99fD33a13e4402c10eBE32a3B8b399d6f3aBD3b'};
 TradeMarket.networks['128'] = {address: '0xF62dF8eC20D59111C5d8a3397558a21bE35ffe61'};
 TomERC20.networks['128'] = {address: '0x391942D8a0CA5ceF6C1D3355A27E2814060a8a7a'};
