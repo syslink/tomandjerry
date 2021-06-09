@@ -3,6 +3,27 @@
     <router-view />
   </div>
 </template>
+<script>
+import Web3 from "web3";
+import { myMixins } from "./assets/js/Wallet/ConnectWallet";
+import { Drizzle } from "@drizzle/store";
+import drizzleOptions from "./assets/js/Common/drizzleOptions";
+export default {
+  mixins: [myMixins],
+  data() {
+    return {
+      web3: null,
+    };
+  },
+  created() {
+    this.connectWallet(); //链接钱包
+    const drizzle = new Drizzle(drizzleOptions);
+    console.log(drizzle);
+    // this.$store.state.drizzle = drizzle;
+    this.$store.dispatch("setDrizzle", drizzle);
+  },
+};
+</script>
 
 <style>
 #app {
