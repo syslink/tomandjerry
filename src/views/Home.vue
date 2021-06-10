@@ -55,12 +55,9 @@
             <span>Total transaction</span
             ><span
               >{{
-                getReadableNumber(
-                  this.state.tradeMarketInfo.totalAmount,
-                  18,
-                  2
-                )
-              }}TOM</span
+                getReadableNumber1(tradeMarketInfo.totalAmount, 18, 2)
+              }}
+              TOM</span
             >
           </div>
         </div>
@@ -87,22 +84,9 @@
             <span>Service charge for breeding cats</span
             ><span>{{ myInfo.breedingFeeAmount }}</span>
           </div>
-          <div class="one">
-            <!-- <span>NFT Trading Vol</span><span>161,231,222</span> -->
-          </div>
         </div>
       </div>
       <div class="center">Hottest Artworks in 2 Weeks</div>
-      <!-- <div class="bottom">
-        <img src="../assets/img/cat1.png" alt="cat" class="out" />
-        <img src="../assets/img/cat2.png" alt="cat" />
-        <img src="../assets/img/cat3.png" alt="cat" />
-        <img src="../assets/img/cat4.png" alt="cat" />
-        <img src="../assets/img/cat5.png" alt="cat" class="out" />
-        <img src="../assets/img/cat6.png" alt="cat" />
-        <img src="../assets/img/cat7.png" alt="cat" />
-        <img src="../assets/img/cat8.png" alt="cat" />
-      </div> -->
       <div class="catsbox">
         <div
           class="cats_item"
@@ -258,18 +242,26 @@
 <script>
 import EthCrypto from "eth-crypto";
 import BigNumber from "bignumber.js";
-import utils from "../assets/js/Common/utils";
+import * as utils from "../assets/js/Common/utils";
+import { mapState } from "vuex";
 export default {
   name: "Home",
   components: {},
+  computed: {
+    tomCatNFT() {
+      return this.$store.state.drizzle.contracts.TomCatNFT;
+    },
+    tradeMarket() {
+      return this.$store.state.drizzle.contracts.TradeMarket;
+    },
+    tomERC20() {
+      return this.$store.state.drizzle.contracts.tomERC20;
+    },
+  },
   data() {
     let { drizzle, account } = this.$store.state;
     return {
       approveTip: "授权TOM",
-      tomCatNFT: drizzle.contracts.TomCatNFT,
-      tradeMarket: drizzle.contracts.TradeMarket,
-      tomERC20: drizzle.contracts.TomERC20,
-
       drizzleState: drizzle.store.getState(),
       accountAddr:
         account != null
@@ -305,87 +297,223 @@ export default {
   },
   created() {
     this.updateTomCatData();
-    // this.updateTradeMarketData();
-    // this.updateMyInfo();
+    this.updateTradeMarketData();
+    this.updateMyInfo();
 
     setInterval(() => {
-      // this.updateMyInfo();
+      this.updateMyInfo();
       this.updateTomCatData();
-      //  this.updateTradeMarketData();
+      this.updateTradeMarketData();
     }, 60000);
   },
   methods: {
+    getReadableNumber1(v, assetDecimal, displayDecimal) {
+      return utils.getReadableNumber(
+        this.tradeMarketInfo.totalAmount,
+        assetDecimal,
+        displayDecimal
+      );
+    },
     updateTomCatData() {
-      // const {
-      //   tomCatNFT,
-      //   tradeMarket,
-      //   tomCatNFTInfo,
-      //   // tradeMarketInfo,
-      //   // priceDescending,
-      //   // pageSize,
-      // } = this.$store.state.drizzle.contracts;
+      const _this = this;
+      setTimeout(() => {
+        //总数量
+        this.tomCatNFT.methods
+          .totalSupply()
+          .call()
+          .then((v) => {
+            this.tomCatNFTInfo.totalSupply = v;
+            // this.setState({tomCatNFTInfo});
+          });
+        //种猫数量
+        this.tomCatNFT.methods
+          .breedingCatAmount()
+          .call()
+          .then((v) => {
+            this.tomCatNFTInfo.breedingCatNum = v;
+            //this.setState({tomCatNFTInfo});
+          });
+        this.tomCatNFT.methods
+          .balanceOf(this.tradeMarket.address)
+          .call()
+          .then(async (v) => {
+            this.tomCatNFTInfo.sellingCatNum = parseInt(v);
+            // this.setState({tomCatNFTInfo});
+            this.tradeMarketInfo.sellingCatIds = [];
+            this.tradeMarket.methods
+              .getOrderIds(
+                0,
+                this.pageSize < this.tomCatNFTInfo.sellingCatNum
+                  ? this.pageSize
+                  : this.tomCatNFTInfo.sellingCatNum,
+                this.priceDescending
+              )
+              .call()
+              .then((catIds) => {
+                catIds.map((catId) => {
+                  this.tomCatNFT.methods
+                    .id2CatInfoMap(catId)
+                    .call()
+                    .then((catInfo) => {
+                      if (this.tradeMarketInfo.sellingCatInfos[catId] == null) {
+                        this.tradeMarketInfo.sellingCatInfos[catId] = {};
+                      }
+                      this.tradeMarketInfo.sellingCatInfos[catId].name =
+                        catInfo.name;
+                      this.tradeMarketInfo.sellingCatInfos[catId].desc =
+                        catInfo.desc;
+                      this.tradeMarketInfo.sellingCatInfos[catId].isBreeding =
+                        catInfo.isBreeding;
+                      this.tradeMarketInfo.sellingCatInfos[catId].motherId =
+                        catInfo.motherId;
+                      // this.setState({tradeMarketInfo});
+                    });
+                  this.tradeMarket.methods
+                    .tokenOrderMap(catId)
+                    .call()
+                    .then((catInfo) => {
+                      if (this.tradeMarketInfo.sellingCatInfos[catId] == null) {
+                        this.tradeMarketInfo.sellingCatInfos[catId] = {};
+                      }
+                      this.tradeMarketInfo.sellingCatInfos[catId].price =
+                        catInfo.price;
+                      //this.setState({tradeMarketInfo});
+                    });
+                });
+              });
+          });
+      }, 1000);
+    },
+    updateTradeMarketData() {
+      const _this = this;
+      setTimeout(() => {
+        //const { tradeMarket, tradeMarketInfo } = this.state;
 
-     this.tomCatNFT.methods
-        .totalSupply()
+        this.tradeMarket.methods
+          .totalAmount()
+          .call()
+          .then((v) => {
+            this.tradeMarketInfo.totalAmount = v;
+            // this.setState({ tradeMarketInfo });
+          });
+        this.tradeMarket.methods
+          .breedingOwnerFee()
+          .call()
+          .then((v) => {
+            this.tradeMarketInfo.breedingOwnerFee = v;
+            // this.setState({ tradeMarketInfo });
+          });
+        this.tradeMarket.methods
+          .getDealedOrderNumber()
+          .call()
+          .then((v) => {
+            this.tradeMarketInfo.dealCount = v;
+            // this.setState({ tradeMarketInfo });
+          });
+      }, 1000);
+    },
+    updateTradeMarketData() {
+      // const { tradeMarket, tradeMarketInfo } = this.state;
+
+      this.tradeMarket.methods
+        .totalAmount()
         .call()
         .then((v) => {
-          tomCatNFTInfo.totalSupply = v;
-          // this.setState({tomCatNFTInfo});
+          this.tradeMarketInfo.totalAmount = v;
+          //this.setState({ tradeMarketInfo });
         });
-      tomCatNFT.methods
-        .breedingCatAmount()
+      this.tradeMarket.methods
+        .breedingOwnerFee()
         .call()
         .then((v) => {
-          tomCatNFTInfo.breedingCatNum = v;
-          //this.setState({tomCatNFTInfo});
+          this.tradeMarketInfo.breedingOwnerFee = v;
+          //this.setState({ tradeMarketInfo });
         });
-      tomCatNFT.methods
-        .balanceOf(tradeMarket.address)
+      this.tradeMarket.methods
+        .getDealedOrderNumber()
         .call()
-        .then(async (v) => {
-          tomCatNFTInfo.sellingCatNum = parseInt(v);
-          // this.setState({tomCatNFTInfo});
-          tradeMarketInfo.sellingCatIds = [];
+        .then((v) => {
+          this.tradeMarketInfo.dealCount = v;
+          // this.setState({ tradeMarketInfo });
+        });
+    },
 
-          tradeMarket.methods
-            .getOrderIds(
-              0,
-              pageSize < tomCatNFTInfo.sellingCatNum
-                ? pageSize
-                : tomCatNFTInfo.sellingCatNum,
-              priceDescending
-            )
+    updateMyInfo() {
+      //const { tomCatNFT, tradeMarket, myInfo, accountAddr } = this.state;
+      //var { motherInfos } = this.state;
+      if (this.accountAddr == "0x0000000000000000000000000000000000000000")
+        return;
+
+      this.motherInfos = [0];
+      this.tradeMarket.methods
+        .sellingCatsNumber(this.accountAddr)
+        .call()
+        .then((v) => {
+          this.myInfo.sellingCatNum = v;
+          this.tradeMarket.methods
+            .getSellingCats(this.accountAddr, 0, parseInt(v))
             .call()
-            .then((catIds) => {
-              catIds.map((catId) => {
-                tomCatNFT.methods
+            .then((ids) => {
+              ids.map((catId) => {
+                this.tomCatNFT.methods
                   .id2CatInfoMap(catId)
                   .call()
                   .then((catInfo) => {
-                    if (tradeMarketInfo.sellingCatInfos[catId] == null) {
-                      tradeMarketInfo.sellingCatInfos[catId] = {};
+                    if (this.myInfo.mySellingCatInfos[catId] == null) {
+                      this.myInfo.mySellingCatInfos[catId] = {};
                     }
-                    tradeMarketInfo.sellingCatInfos[catId].name = catInfo.name;
-                    tradeMarketInfo.sellingCatInfos[catId].desc = catInfo.desc;
-                    tradeMarketInfo.sellingCatInfos[catId].isBreeding =
+                    this.myInfo.mySellingCatInfos[catId].name = catInfo.name;
+                    this.myInfo.mySellingCatInfos[catId].desc = catInfo.desc;
+                    this.myInfo.mySellingCatInfos[catId].isBreeding =
                       catInfo.isBreeding;
-                    tradeMarketInfo.sellingCatInfos[catId].motherId =
+                    this.myInfo.mySellingCatInfos[catId].motherId =
                       catInfo.motherId;
-                    // this.setState({tradeMarketInfo});
-                  });
-                tradeMarket.methods
-                  .tokenOrderMap(catId)
-                  .call()
-                  .then((catInfo) => {
-                    if (tradeMarketInfo.sellingCatInfos[catId] == null) {
-                      tradeMarketInfo.sellingCatInfos[catId] = {};
-                    }
-                    tradeMarketInfo.sellingCatInfos[catId].price =
-                      catInfo.price;
-                    //this.setState({tradeMarketInfo});
+                    this.setState({ myInfo });
                   });
               });
+              this.motherInfos.push(...ids);
+              //this.setState({myInfo, motherInfos});
             });
+
+          this.tomCatNFT.methods
+            .balanceOf(this.accountAddr)
+            .call()
+            .then((amount) => {
+              this.myInfo.totalAmount =
+                parseInt(amount) + parseInt(this.myInfo.sellingCatNum);
+              //this.setState({myInfo});
+              for (var i = 0; i < parseInt(amount); i++) {
+                this.tomCatNFT.methods
+                  .tokenOfOwnerByIndex(this.accountAddr, i)
+                  .call()
+                  .then((catId) => {
+                    this.tomCatNFT.methods
+                      .id2CatInfoMap(catId)
+                      .call()
+                      .then((catInfo) => {
+                        if (this.myInfo.myCatInfos[catId] == null) {
+                          this.myInfo.myCatInfos[catId] = {};
+                        }
+                        this.myInfo.myCatInfos[catId].name = catInfo.name;
+                        this.myInfo.myCatInfos[catId].desc = catInfo.desc;
+                        this.myInfo.myCatInfos[catId].isBreeding =
+                          catInfo.isBreeding;
+                        this.myInfo.myCatInfos[catId].motherId =
+                          catInfo.motherId;
+                        //this.setState({myInfo});
+                      });
+                    this.motherInfos.push(catId);
+                    // this.setState({myInfo, motherInfos});
+                  });
+              }
+            });
+        });
+      this.tradeMarket.methods
+        .breedingCatOwnerFeeMap(this.accountAddr)
+        .call()
+        .then((v) => {
+          this.myInfo.breedingFeeAmount = v;
+          // this.setState({myInfo});
         });
     },
   },

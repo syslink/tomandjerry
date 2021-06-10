@@ -178,6 +178,9 @@
   margin-top: 60px;
   margin-bottom: 100px;
 }
+.addAddress:hover{
+  cursor: pointer;
+}
 .hahah{
   width: 515px;
   display: flex;

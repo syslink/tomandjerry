@@ -10,7 +10,19 @@
       </div>
       <div class="ra_box_div2">
         <span class="div2_left_text">Upload image</span>
-        <div class="hahah">
+        <div class="select_box2">
+          <input
+            class="input_box"
+            type="file"
+            placeholder="Please enter a title"
+            @change="
+              (e) => {
+                this.upload(e);
+              }
+            "
+          />
+        </div>
+        <!-- <div class="hahah">
           <el-upload
             action="#"
             class="uploadimg_input"
@@ -55,9 +67,34 @@
             <span>* 图片大小不超过500kb</span>
             <span>* 作品必须为上传人100%完全独立拥有版权的原创作品</span>
           </div>
+        </div> -->
+      </div>
+      <div class="ra_box_div2">
+        <span class="div2_left_text">Choose a female cat</span>
+        <div class="select_box2">
+          <select class="select_menu">
+            <option>0</option>
+          </select>
         </div>
       </div>
       <div class="ra_box_div2">
+        <span class="div2_left_text">Is Breed cat</span>
+        <div class="redio_box">
+          <div class="redio_item redio_item_one" @click="breedCat = 1">
+            <div class="item_left">
+              <img :src="breedCat == 1 ? RadioChecked : RadioDefault" />
+              <span>YES</span>
+            </div>
+          </div>
+          <div class="redio_item" @click="breedCat = 2">
+            <div class="item_left">
+              <img :src="breedCat == 2 ? RadioChecked : RadioDefault" />
+              <span>No</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="ra_box_div2">
         <span class="div2_left_text">Category</span>
         <div class="redio_box">
           <div class="redio_item redio_item_one" @click="Category = 1">
@@ -138,9 +175,7 @@
             }"
             placeholder="00:00"
           >
-            <!-- <input class="input_time" placeholder="00" />
-            <span class="tt">:</span>
-            <input class="input_time" placeholder="00" /> -->
+           
           </el-time-picker>
         </div>
       </div>
@@ -168,18 +203,6 @@
       <div class="ra_box_div2">
         <span class="div2_left_text"> Date on shelf </span>
         <div class="Auction_time timer dada">
-          <!-- <input class="input_time_moouth" placeholder="January" />
-          <span class="tt">/</span>
-          <input class="input_time" placeholder="01" />
-          <span class="tt">/</span>
-          <input class="input_time" placeholder="2020" />
-          <input
-            class="input_time"
-            placeholder="00"
-            style="margin-left: 40px"
-          />
-          <span class="tt">:</span>
-          <input class="input_time" placeholder="00" /> -->
           <el-date-picker
             v-model="value3"
             type="datetime"
@@ -188,7 +211,7 @@
           >
           </el-date-picker>
         </div>
-      </div>
+      </div> -->
       <div class="addAddress">Publish NFT</div>
     </div>
   </div>
@@ -211,7 +234,22 @@ export default {
       AuctionType: 2,
       value1: new Date(2016, 9, 10, 18, 40),
       value3: "",
+      breedCat: 1,
+      ipfs: null,
+      defaultIPFSHash: "QmNtWjcfKTkJNfErtFMPwMV9F5C5DRKGUTHi4yjigtXP4N",
+      curCatInfo: {
+        ipfsHash: "QmNtWjcfKTkJNfErtFMPwMV9F5C5DRKGUTHi4yjigtXP4N",
+      },
+      ipfsUrl: "https://ipfs.io/ipfs/",
     };
+  },
+  created() {
+    const { create, urlSource } = require("ipfs-http-client");
+    this.ipfs = create({
+      host: "ipfs.infura.io",
+      port: "5001",
+      protocol: "https",
+    });
   },
   methods: {
     handleRemove(file) {
@@ -226,6 +264,7 @@ export default {
       this.$message.warning(`当前限制只能上传 1 张图片`);
     },
     beforeAvatarUpload(file) {
+      console.log(file);
       const isJPG =
         file.raw.type === "image/jpeg" ||
         file.raw.type === "image/jpg" ||
@@ -241,10 +280,61 @@ export default {
       }
       this.imageUrl = URL.createObjectURL(file.raw);
       console.log(this.imageUrl);
+
+      this.upload(this.imageUrl);
       return isJPG && isLt2M;
     },
     submitUpload() {
       this.$refs.upload.submit();
+    },
+    // async upload(url) {
+    //   // const file = e.target.files[0];
+    //   if (url == null) return;
+
+    //   const added = await this.ipfs.add(url, {
+    //     progress: (prog) => console.log("upload", `received: ${prog}`),
+    //   });
+    //   console.log("upload", added);
+    //   //this.setState({ catPic: added.path });
+    // },
+    async upload(e) {
+      const file = e.target.files[0];
+      if (file == null) return;
+
+      const added = await this.ipfs.add(file, {
+        progress: (prog) => console.log("upload", `received: ${prog}`),
+      });
+      console.log("upload", added);
+      //this.setState({ catPic: added.path });
+    },
+    createCatNFT() {
+      const { accountAddr, tomCatNFT } = this.state;
+      if (utils.isEmptyObj(this.state.createdCatName)) {
+        Feedback.toast.error(T("请输入猫咪名称"));
+        return;
+      }
+      if (utils.isEmptyObj(this.state.catPic)) {
+        Feedback.toast.error(T("请输入猫咪头像url"));
+        return;
+      }
+      const motherId =
+        this.state.selectedMotherId == null
+          ? 0
+          : parseInt(this.state.selectedMotherId);
+      this.state.curStakeId = tomCatNFT.methods["mint"].cacheSend(
+        this.state.createdCatName,
+        this.state.catPic,
+        motherId,
+        this.state.isBreeding,
+        { from: accountAddr }
+      );
+      this.syncTxStatus(
+        () => {
+          this.updateTomCatData();
+          this.updateMyInfo();
+        },
+        () => {}
+      );
     },
   },
 };
