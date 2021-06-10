@@ -13,6 +13,10 @@ function getReadableNumber(value, assetDecimal, displayDecimal) {
   renderValue = renderValue.toString(10);
   return renderValue;
 }
+function isEmptyObj(obj) {
+  return obj == null || obj == '';
+}
+
 export {
-  getReadableNumber
+  getReadableNumber,isEmptyObj
 }

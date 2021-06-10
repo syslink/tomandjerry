@@ -5,7 +5,11 @@
       <div class="ra_box_div2">
         <span class="div2_left_text">Title</span>
         <div class="select_box2">
-          <input class="input_box" placeholder="Please enter a title" />
+          <input
+            class="input_box"
+            placeholder="Please enter a title"
+            v-model="createdCatName"
+          />
         </div>
       </div>
       <div class="ra_box_div2">
@@ -212,16 +216,18 @@
           </el-date-picker>
         </div>
       </div> -->
-      <div class="addAddress">Publish NFT</div>
+      <div class="addAddress" @click="createCatNFT">Publish NFT</div>
     </div>
   </div>
 </template>
 <script>
 const RadioDefault = require("../../assets/img/RadioDefault.png");
 const RadioChecked = require("../../assets/img/RadioChecked.png");
+import * as utils from "../../assets/js/Common/utils";
 export default {
   name: "PublishNFT",
   data() {
+    let { account } = this.$store.state.account;
     return {
       dialogImageUrl: "",
       dialogVisible: false,
@@ -241,6 +247,12 @@ export default {
         ipfsHash: "QmNtWjcfKTkJNfErtFMPwMV9F5C5DRKGUTHi4yjigtXP4N",
       },
       ipfsUrl: "https://ipfs.io/ipfs/",
+      createdCatName: "",
+      isUploadStatus: false,
+      accountAddr:
+        account != null
+          ? account
+          : "0x0000000000000000000000000000000000000000",
     };
   },
   created() {
@@ -250,6 +262,17 @@ export default {
       port: "5001",
       protocol: "https",
     });
+  },
+  computed: {
+    tomCatNFT() {
+      return this.$store.state.drizzle.contracts.TomCatNFT;
+    },
+    // tradeMarket() {
+    //   return this.$store.state.drizzle.contracts.TradeMarket;
+    // },
+    // tomERC20() {
+    //   return this.$store.state.drizzle.contracts.tomERC20;
+    // },
   },
   methods: {
     handleRemove(file) {
@@ -287,16 +310,6 @@ export default {
     submitUpload() {
       this.$refs.upload.submit();
     },
-    // async upload(url) {
-    //   // const file = e.target.files[0];
-    //   if (url == null) return;
-
-    //   const added = await this.ipfs.add(url, {
-    //     progress: (prog) => console.log("upload", `received: ${prog}`),
-    //   });
-    //   console.log("upload", added);
-    //   //this.setState({ catPic: added.path });
-    // },
     async upload(e) {
       const file = e.target.files[0];
       if (file == null) return;
@@ -305,16 +318,21 @@ export default {
         progress: (prog) => console.log("upload", `received: ${prog}`),
       });
       console.log("upload", added);
+      if (added) {
+        this.isUploadStatus = true;
+      }
       //this.setState({ catPic: added.path });
     },
+
     createCatNFT() {
-      const { accountAddr, tomCatNFT } = this.state;
-      if (utils.isEmptyObj(this.state.createdCatName)) {
-        Feedback.toast.error(T("请输入猫咪名称"));
+      //const { accountAddr, tomCatNFT } = this.state;
+      if (utils.isEmptyObj(this.createdCatName)) {
+        this.toast("error", "请输入猫咪名称");
         return;
       }
-      if (utils.isEmptyObj(this.state.catPic)) {
-        Feedback.toast.error(T("请输入猫咪头像url"));
+      if (!this.isUploadStatus) {
+        // Feedback.toast.error(T("请输入猫咪头像url"));
+        this.toast("error", "请上传猫咪照片");
         return;
       }
       const motherId =
