@@ -15,6 +15,9 @@ const mutations = {
 	[TYPES.SET_DRIZZLE](state, v) {
 		state.drizzle = v;
 	},
+	[TYPES.SET_ACCOUNTADDR](state, v) {
+		state.accountAddr = v;
+	},
 	
 }
 export default mutations

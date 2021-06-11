@@ -76,7 +76,10 @@
       <div class="ra_box_div2">
         <span class="div2_left_text">Choose a female cat</span>
         <div class="select_box2">
-          <select class="select_menu">
+          <select
+            class="select_menu"
+            @change="handleMotherIdChanged.bind(this)"
+          >
             <option>0</option>
           </select>
         </div>
@@ -84,15 +87,15 @@
       <div class="ra_box_div2">
         <span class="div2_left_text">Is Breed cat</span>
         <div class="redio_box">
-          <div class="redio_item redio_item_one" @click="breedCat = 1">
+          <div class="redio_item redio_item_one" @click="isBreeding = true">
             <div class="item_left">
-              <img :src="breedCat == 1 ? RadioChecked : RadioDefault" />
+              <img :src="isBreeding ? RadioChecked : RadioDefault" />
               <span>YES</span>
             </div>
           </div>
-          <div class="redio_item" @click="breedCat = 2">
+          <div class="redio_item" @click="isBreeding = false">
             <div class="item_left">
-              <img :src="breedCat == 2 ? RadioChecked : RadioDefault" />
+              <img :src="!isBreeding ? RadioChecked : RadioDefault" />
               <span>No</span>
             </div>
           </div>
@@ -227,7 +230,6 @@ import * as utils from "../../assets/js/Common/utils";
 export default {
   name: "PublishNFT",
   data() {
-    let { account } = this.$store.state.account;
     return {
       dialogImageUrl: "",
       dialogVisible: false,
@@ -249,10 +251,15 @@ export default {
       ipfsUrl: "https://ipfs.io/ipfs/",
       createdCatName: "",
       isUploadStatus: false,
+      catPic: null,
       accountAddr:
-        account != null
-          ? account
+        this.$store.state.accountAddr != null
+          ? this.$store.state.accountAddr
           : "0x0000000000000000000000000000000000000000",
+      selectedMotherId: 0,
+      curStakeId: null,
+      isBreeding: false,
+      file: null,
     };
   },
   created() {
@@ -275,6 +282,9 @@ export default {
     // },
   },
   methods: {
+    handleMotherIdChanged(v) {
+      this.selectedMotherId = v;
+    },
     handleRemove(file) {
       console.log(file);
       this.$refs.upload.clearFiles();
@@ -313,46 +323,103 @@ export default {
     async upload(e) {
       const file = e.target.files[0];
       if (file == null) return;
-
-      const added = await this.ipfs.add(file, {
-        progress: (prog) => console.log("upload", `received: ${prog}`),
-      });
-      console.log("upload", added);
-      if (added) {
-        this.isUploadStatus = true;
-      }
+      this.file = file;
+      // const added = await this.ipfs.add(file, {
+      //   progress: (prog) => console.log("upload", `received: ${prog}`),
+      // });
+      // console.log("upload", added);
+      // this.catPic = added.path;
+      // if (added) {
+      //   this.isUploadStatus = true;
+      // }
       //this.setState({ catPic: added.path });
     },
 
-    createCatNFT() {
+    async createCatNFT() {
       //const { accountAddr, tomCatNFT } = this.state;
+      //setTimeout(() => {
+
       if (utils.isEmptyObj(this.createdCatName)) {
         this.toast("error", "请输入猫咪名称");
         return;
       }
-      if (!this.isUploadStatus) {
+      if (utils.isEmptyObj(this.file)) {
         // Feedback.toast.error(T("请输入猫咪头像url"));
         this.toast("error", "请上传猫咪照片");
         return;
       }
+      const loading = this.$loading({
+        fullscreen: true,
+        text: "Creating, please wait...",
+        background: "rgba(0,0,0,0.7)",
+      });
+      const added = await this.ipfs.add(this.file, {
+        progress: (prog) => console.log("upload", `received: ${prog}`),
+      });
+      console.log("upload", added);
+      this.catPic = added.path;
+
+      // if (added) {
+      //   this.isUploadStatus = true;
+      // }
+      // if (!isUploadStatus) {
+      //   // Feedback.toast.error(T("请输入猫咪头像url"));
+      //   this.toast("error", "正在上传猫咪照片，请稍后再试");
+      //   return;
+      // }
+
       const motherId =
-        this.state.selectedMotherId == null
-          ? 0
-          : parseInt(this.state.selectedMotherId);
-      this.state.curStakeId = tomCatNFT.methods["mint"].cacheSend(
-        this.state.createdCatName,
-        this.state.catPic,
+        this.selectedMotherId == null ? 0 : parseInt(this.selectedMotherId);
+      this.curStakeId = this.tomCatNFT.methods["mint"].cacheSend(
+        this.createdCatName,
+        this.catPic,
         motherId,
-        this.state.isBreeding,
-        { from: accountAddr }
+        this.isBreeding,
+        { from: this.accountAddr }
       );
-      this.syncTxStatus(
-        () => {
-          this.updateTomCatData();
-          this.updateMyInfo();
-        },
-        () => {}
+      console.log(
+        this.createdCatName,
+        this.catPic,
+        motherId,
+        this.isBreeding,
+        this.accountAddr
       );
+      if (this.curStakeId == 0) {
+        loading.close();
+      }
+      console.log(this.curStakeId);
+      // this.syncTxStatus(
+      //   () => {
+      //     this.updateTomCatData();
+      //     this.updateMyInfo();
+      //   },
+      //   () => {}
+      // );
+      // }, 2000);
+    },
+    syncTxStatus(successCallback, failCallback) {
+      const intervalId = setInterval(() => {
+        // get the transaction states from the drizzle state
+        const { transactions, transactionStack } = this.props.drizzleState;
+        // get the transaction hash using our saved `stackId`
+        const txHash = transactionStack[this.state.curStakeId];
+        console.log("txHash", txHash, this.state.curStakeId, transactionStack);
+        // if transaction hash does not exist, don't display anything
+        if (!txHash) return;
+        console.log("transaction", transactions[txHash]);
+        if (transactions[txHash]) {
+          const status = transactions[txHash].status;
+          if (status == "pending") return;
+
+          if (status == "success") {
+            successCallback();
+          } else {
+            failCallback();
+          }
+          clearInterval(intervalId);
+        }
+        return;
+      }, 3000);
     },
   },
 };

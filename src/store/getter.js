@@ -4,6 +4,9 @@ import state from "./state"
 	 account:(state,getters) =>{
 		return state.account
 	 },
+	 accountAddr: (state, getters) => {
+		 return state.accountAddr
+	 },
 	 isConnected: (state, getters) => {
 		return state.isConnected
 	 },

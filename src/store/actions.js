@@ -3,6 +3,9 @@ const actions = {
   setAccount(vuex, v) {
     vuex.commit(TYPES.SET_ACCOUNT,v)
   },
+  setAccountAddr(vuex, v) {
+    vuex.commit(TYPES.SET_ACCOUNTADDR,v)
+  },
   setIsConnected(vuex, v) {
     vuex.commit(TYPES.SET_ISCONNECTED,v)
   },

@@ -18,7 +18,7 @@ export default {
   created() {
     this.connectWallet(); //链接钱包
     const drizzle = new Drizzle(drizzleOptions);
-    console.log(drizzle);
+    //console.log(drizzle);
     this.$store.state.drizzle = drizzle;
     //this.$store.dispatch("setDrizzle", drizzle);
   },
