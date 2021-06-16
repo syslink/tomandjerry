@@ -355,14 +355,14 @@ export default {
         this.isBreeding,
         { from: this.accountAddr }
       );
-      // this.syncTxStatus(
-      //   () => {
-      //     // this.updateTomCatData();
-      //     // this.updateMyInfo();
-      //     window.reload();
-      //   },
-      //   () => {}
-      // );
+      this.syncTxStatus(
+        () => {
+          // this.updateTomCatData();
+          // this.updateMyInfo();
+          window.reload();
+        },
+        () => {}
+      );
       console.log(
         this.createdCatName,
         this.catPic,
