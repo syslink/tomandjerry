@@ -14,6 +14,12 @@ const actions = {
   },
   setDrizzle(vuex, v) {
     vuex.commit(TYPES.SET_DRIZZLE,v)
+  },
+  getMyCatInfos(vuex, v) {
+    vuex.commit(TYPES.GET_MYCATINFOS,v)
+  },
+  getTradeMarketInfo(vuex, v) {
+    vuex.commit(TYPES.GET_TRADEMARKETINFO,v)
   }
 }
 export default actions

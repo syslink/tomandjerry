@@ -15,13 +15,17 @@ export default {
       web3: null,
     };
   },
-  created() {
+  async created() {
     this.connectWallet(); //链接钱包
-    const drizzle = new Drizzle(drizzleOptions);
-    //console.log(drizzle);
-    this.$store.state.drizzle = drizzle;
-    //this.$store.dispatch("setDrizzle", drizzle);
+    let drizzle = await new Drizzle(drizzleOptions);
+    await (this.$store.state.drizzle = drizzle);
+
+    // setTimeout(() => {
+    //   this.$store.dispatch("getMyCatInfos");
+    //   this.$store.dispatch("getTradeMarketInfo");
+    // }, 500);
   },
+  methods: {},
 };
 </script>
 

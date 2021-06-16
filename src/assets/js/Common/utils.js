@@ -1,6 +1,5 @@
 import BigNumber from 'bignumber.js';
 function getReadableNumber(value, assetDecimal, displayDecimal) {
-  console.log(11111)
   let renderValue = new BigNumber(value);
   renderValue = renderValue.shiftedBy(assetDecimal * -1);
 

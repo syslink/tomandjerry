@@ -30,5 +30,5 @@ const options = {
   },
   //syncAlways: true,
 };
-console.log(options)
+// console.log(options)
 export default options;

@@ -245,7 +245,7 @@
   margin-top: 20px;
 }
 .catsbox{
-  width: 1088px;
+  width: 1110px;
   height: auto;
   display: flex;
   flex-direction: row;
@@ -267,8 +267,12 @@
   cursor: pointer;
 }
 .item_imgs{
-  margin-left: -22px;
-  margin-top: -20px;
+  /* margin-left: -22px;
+  margin-top: -20px; */
+  width: 100%;
+  height: 250px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
 }
 .item_center{
   width: calc(100% - 30px);
@@ -278,7 +282,7 @@
   align-items: flex-start;
   padding: 10px 15px;
   background: #F3E7C7;
-  margin-top: -28px;
+  /* margin-top: -28px; */
 }
 .center_top{
   display: flex;
@@ -296,7 +300,8 @@
 .name{
   color: #4D3034;
   font-size: 14px;
-  font-family: 'SanvitoPro-BoldDisp';   
+  /* font-family: 'SanvitoPro-BoldDisp';   
+  font-family: '"Futura Bk BT Book"';  */
   margin-top: 6px;
 }
 .item_bottom{

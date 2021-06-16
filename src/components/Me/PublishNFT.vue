@@ -274,12 +274,6 @@ export default {
     tomCatNFT() {
       return this.$store.state.drizzle.contracts.TomCatNFT;
     },
-    // tradeMarket() {
-    //   return this.$store.state.drizzle.contracts.TradeMarket;
-    // },
-    // tomERC20() {
-    //   return this.$store.state.drizzle.contracts.tomERC20;
-    // },
   },
   methods: {
     handleMotherIdChanged(v) {
@@ -324,27 +318,14 @@ export default {
       const file = e.target.files[0];
       if (file == null) return;
       this.file = file;
-      // const added = await this.ipfs.add(file, {
-      //   progress: (prog) => console.log("upload", `received: ${prog}`),
-      // });
-      // console.log("upload", added);
-      // this.catPic = added.path;
-      // if (added) {
-      //   this.isUploadStatus = true;
-      // }
-      //this.setState({ catPic: added.path });
     },
 
     async createCatNFT() {
-      //const { accountAddr, tomCatNFT } = this.state;
-      //setTimeout(() => {
-
       if (utils.isEmptyObj(this.createdCatName)) {
         this.toast("error", "请输入猫咪名称");
         return;
       }
       if (utils.isEmptyObj(this.file)) {
-        // Feedback.toast.error(T("请输入猫咪头像url"));
         this.toast("error", "请上传猫咪照片");
         return;
       }
@@ -358,15 +339,6 @@ export default {
       });
       console.log("upload", added);
       this.catPic = added.path;
-
-      // if (added) {
-      //   this.isUploadStatus = true;
-      // }
-      // if (!isUploadStatus) {
-      //   // Feedback.toast.error(T("请输入猫咪头像url"));
-      //   this.toast("error", "正在上传猫咪照片，请稍后再试");
-      //   return;
-      // }
 
       const motherId =
         this.selectedMotherId == null ? 0 : parseInt(this.selectedMotherId);
@@ -387,15 +359,6 @@ export default {
       if (this.curStakeId == 0) {
         loading.close();
       }
-      console.log(this.curStakeId);
-      // this.syncTxStatus(
-      //   () => {
-      //     this.updateTomCatData();
-      //     this.updateMyInfo();
-      //   },
-      //   () => {}
-      // );
-      // }, 2000);
     },
     syncTxStatus(successCallback, failCallback) {
       const intervalId = setInterval(() => {
