@@ -349,6 +349,13 @@ export default {
         this.isBreeding,
         { from: this.accountAddr }
       );
+      this.syncTxStatus(
+        () => {
+          // this.updateTomCatData();
+          // this.updateMyInfo();
+        },
+        () => {}
+      );
       console.log(
         this.createdCatName,
         this.catPic,
@@ -356,9 +363,9 @@ export default {
         this.isBreeding,
         this.accountAddr
       );
-      if (this.curStakeId == 0) {
-        loading.close();
-      }
+      // if (this.curStakeId == 0) {
+      //   loading.close();
+      // }
     },
     syncTxStatus(successCallback, failCallback) {
       const intervalId = setInterval(() => {
