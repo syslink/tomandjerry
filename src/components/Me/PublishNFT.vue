@@ -224,6 +224,8 @@
   </div>
 </template>
 <script>
+import { Drizzle } from "@drizzle/store";
+import drizzleOptions from "../../assets/js/Common/drizzleOptions";
 const RadioDefault = require("../../assets/img/RadioDefault.png");
 const RadioChecked = require("../../assets/img/RadioChecked.png");
 import * as utils from "../../assets/js/Common/utils";
@@ -260,6 +262,7 @@ export default {
       curStakeId: null,
       isBreeding: false,
       file: null,
+      drizzleState: null,
     };
   },
   created() {
@@ -321,6 +324,9 @@ export default {
     },
 
     async createCatNFT() {
+      let drizzle = new Drizzle(drizzleOptions);
+      this.drizzleState = drizzle.store.getState();
+
       if (utils.isEmptyObj(this.createdCatName)) {
         this.toast("error", "请输入猫咪名称");
         return;
@@ -349,13 +355,14 @@ export default {
         this.isBreeding,
         { from: this.accountAddr }
       );
-      this.syncTxStatus(
-        () => {
-          // this.updateTomCatData();
-          // this.updateMyInfo();
-        },
-        () => {}
-      );
+      // this.syncTxStatus(
+      //   () => {
+      //     // this.updateTomCatData();
+      //     // this.updateMyInfo();
+      //     window.reload();
+      //   },
+      //   () => {}
+      // );
       console.log(
         this.createdCatName,
         this.catPic,
@@ -370,10 +377,10 @@ export default {
     syncTxStatus(successCallback, failCallback) {
       const intervalId = setInterval(() => {
         // get the transaction states from the drizzle state
-        const { transactions, transactionStack } = this.props.drizzleState;
+        const { transactions, transactionStack } = this.drizzleState;
         // get the transaction hash using our saved `stackId`
-        const txHash = transactionStack[this.state.curStakeId];
-        console.log("txHash", txHash, this.state.curStakeId, transactionStack);
+        const txHash = transactionStack[this.curStakeId];
+        console.log("txHash", txHash, this.curStakeId, transactionStack);
         // if transaction hash does not exist, don't display anything
         if (!txHash) return;
         console.log("transaction", transactions[txHash]);
