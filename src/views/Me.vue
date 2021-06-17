@@ -25,47 +25,24 @@
     </div>
     <div class="Me_center">
       <div class="nav">
-        <span
-          class="nav_item"
-          :class="{ nav_item_avtive: navIndex == 1 }"
-          @click="navIndex = 1"
-          >MY PURCHASE</span
+        <router-link to="/me/MyPurchase" exact class="nav_item"
+          >MY PURCHASE</router-link
         >
-        <span class="lines"></span>
-        <span
-          class="nav_item"
-          :class="{ nav_item_avtive: navIndex == 2 }"
-          @click="navIndex = 2"
-          >MY SALES</span
+        <router-link to="/me/MySales" exact class="nav_item"
+          >MY SALES</router-link
         >
-        <span class="lines"></span>
-        <span
-          class="nav_item"
-          :class="{ nav_item_avtive: navIndex == 3 }"
-          @click="navIndex = 3"
-          >MY CREATION</span
+        <!-- <router-link to="/me/MyCreation" exact class="nav_item"
+          >MY CREATION</router-link
+        > -->
+        <router-link to="/me/ReceiverAddress" exact class="nav_item"
+          >MY ADDRESS</router-link
         >
-        <span class="lines"></span>
-        <span
-          class="nav_item"
-          :class="{ nav_item_avtive: navIndex == 4 }"
-          @click="navIndex = 4"
-          >RECEIVER ADDRESS</span
-        >
-        <span class="lines"></span>
-        <span
-          class="nav_item"
-          :class="{ nav_item_avtive: navIndex == 5 }"
-          @click="navIndex = 5"
-          >PUBLISH NFT</span
+        <router-link to="/me/PublishNFT" exact class="nav_item"
+          >PUBLISH NFT</router-link
         >
       </div>
       <div class="nav_box">
-        <MyPurchase v-if="navIndex == 1" />
-        <MySales v-if="navIndex == 2" />
-        <MyCreation v-if="navIndex == 3" />
-        <ReceiverAddress v-if="navIndex == 4" />
-        <PublishNFT v-if="navIndex == 5" />
+        <router-view></router-view>
       </div>
     </div>
     <div class="div4">
@@ -108,21 +85,14 @@
   </div>
 </template>
 <script>
-import MyPurchase from "../components/Me/MyPurchase";
-import MySales from "../components/Me/MySales";
-import MyCreation from "../components/Me/MyCreation";
-import ReceiverAddress from "../components/Me/ReceiverAddress";
-import PublishNFT from "../components/Me/PublishNFT";
 export default {
   name: "Me",
   data() {
     return {
-      navIndex: 1,
       centerDialogVisible: false,
       show_close: false,
     };
   },
-  components: { MyPurchase, MySales, MyCreation, ReceiverAddress, PublishNFT },
   methods: {},
 };
 </script>

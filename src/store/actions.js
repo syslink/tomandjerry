@@ -20,6 +20,9 @@ const actions = {
   },
   getTradeMarketInfo(vuex, v) {
     vuex.commit(TYPES.GET_TRADEMARKETINFO,v)
+  },
+  setDrizzle(vuex,v) {
+    vuex.commit(TYPES.set_drizzle,v)
   }
 }
 export default actions

@@ -15,12 +15,27 @@
   align-items: flex-start;
   flex-wrap: wrap;
   margin-top: 20px;
+  min-height: 400px;
 }
-/* .MyPurchase img{
-  width: 252px;
-  height: 335px;
-  margin-left: -30px;
-} */
+.centerboxs{
+  width: 1133px;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  
+}
+.el-loading-spinner .el-loading-text{
+  color:#8A6358!important;
+  font-size: 17px;
+  font-family: 'SanvitoPro-BoldDisp';   
+}
+.el-loading-spinner i{
+  color:#8A6358!important;
+}
+
 .cats_item{
   display: flex;
   flex-direction: column;
@@ -97,4 +112,18 @@
  border-radius: 20px;
  line-height: 40px;
  margin-top: 20px;
+}
+.nodata{
+  width: 260px;
+  height: 157px;
+  background: url(../../img/nodata.png)no-repeat;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  padding-bottom: 30px;
+  color: #69563C;
+  font-size: 24px;
+  font-family: 'SanvitoPro-BoldDisp'; 
 }

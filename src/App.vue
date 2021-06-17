@@ -8,6 +8,7 @@ import Web3 from "web3";
 import { myMixins } from "./assets/js/Wallet/ConnectWallet";
 import { Drizzle } from "@drizzle/store";
 import drizzleOptions from "./assets/js/Common/drizzleOptions";
+
 export default {
   mixins: [myMixins],
   data() {
@@ -18,7 +19,11 @@ export default {
   async created() {
     this.connectWallet(); //链接钱包
     let drizzle = await new Drizzle(drizzleOptions);
-    await (this.$store.state.drizzle = drizzle);
+    this.$store.state.drizzle = drizzle;
+    // console.log(typeof drizzle);
+    // this.$store.dispatch("setDrizzle", drizzle);
+    // sessionStorage.setItem("drizzle", JSON.stringify(drizzle));
+    //await (this.$store.state.drizzle = drizzle);
 
     // setTimeout(() => {
     //   this.$store.dispatch("getMyCatInfos");

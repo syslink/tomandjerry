@@ -18,6 +18,9 @@ const mutations = {
 	[TYPES.SET_ACCOUNTADDR](state, v) {
 		state.accountAddr = v;
 	},
+	[TYPES.set_drizzle](state, v) {
+		state.drizzle = v;
+	},
 	[TYPES.GET_MYCATINFOS](state, v) {
 		//我的猫咪
 		const { create, urlSource } = require("ipfs-http-client");

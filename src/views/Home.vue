@@ -3,97 +3,63 @@
     <div class="div1"><img src="../assets/img/img1.png" /></div>
     <div class="div2">
       <div class="top">
-        <!-- <div class="top_item">
-          <div class="one mar"><span>Balance</span><span>Locked</span></div>
-          <div class="one">
-            <span>TOM in circulation</span><span>161,231,222</span>
-          </div>
-        </div>
         <div class="top_item">
           <div class="one mar">
-            <span>Pending harvest</span><span>0.000</span>
-          </div>
-          <div class="one">
-            <span>Total supply</span><span>161,231,222</span>
-          </div>
-        </div>
-        <div class="top_item">
-          <div class="one mar"><span>TOM price</span><span>$7.356</span></div>
-          <div class="one"><span>TVL</span><span>161,231,222</span></div>
-        </div>
-        <div class="top_item">
-          <div class="one mar">
-            <span>TOM Market Cap</span><span>$723,356,330</span>
-          </div>
-          <div class="one">
-            <span>Volume（24hr）</span><span>161,231,222</span>
-          </div>
-        </div>
-        <div class="top_item">
-          <div class="one mar">
-            <span>NFT Transactions</span><span>356,330</span>
-          </div>
-          <div class="one">
-            <span>NFT Trading Vol</span><span>161,231,222</span>
-          </div>
-        </div> -->
-        <div class="top_item">
-          <div class="one mar">
-            <!-- <span>Total </span><span>{{ tomCatNFTInfo.totalSupply }}</span> -->
-            <span>Total </span><span>0</span>
+            <span>Total </span><span>{{ tomCatNFTInfo.totalSupply }}</span>
+            <!-- <span>Total </span><span>0</span> -->
           </div>
           <div class="one">
             <span>breeding cats</span>
-            <!-- <span>{{ tomCatNFTInfo.breedingCatNum }}</span> -->
-            <span>0</span>
+            <span>{{ tomCatNFTInfo.breedingCatNum }}</span>
+            <!-- <span>0</span> -->
           </div>
         </div>
         <div class="top_item">
           <div class="one mar">
             <span>fees for breeding cats</span>
-            <!-- <span>{{ tradeMarketInfo.breedingOwnerFee }}</span> -->
-            <span>0</span>
+            <span>{{ tradeMarketInfo.breedingOwnerFee }}</span>
+            <!-- <span>0</span> -->
           </div>
           <div class="one">
             <span>Total transaction</span>
-            <!-- <span
+            <span
               >{{
                 getReadableNumber1(tradeMarketInfo.totalAmount, 18, 2)
               }}
               TOM</span
-            > -->
-            <span>0 TOM</span>
+            >
+            <!-- <span>0 TOM</span> -->
           </div>
         </div>
         <div class="top_item">
           <div class="one mar">
             <span>Total number of transactions</span>
-            <!-- <span>{{ tradeMarketInfo.dealCount }}</span> -->
-            <span>0</span>
+            <span>{{ tradeMarketInfo.dealCount }}</span>
+            <!-- <span>0</span> -->
           </div>
           <div class="one">
             <span>In transaction cats</span>
-            <!-- <span>{{ tomCatNFTInfo.sellingCatNum }}</span> -->
-            <span>0</span>
+            <span>{{ tomCatNFTInfo.sellingCatNum }}</span>
+            <!-- <span>0</span> -->
           </div>
         </div>
         <div class="top_item">
           <div class="one mar">
             <span>Quantity</span>
-            <!-- <span>{{ myInfo.totalAmount }}</span> -->
-            <span>0</span>
+            <span>{{ myInfo.totalAmount }}</span>
+            <!-- <span>0</span> -->
           </div>
           <div class="one">
             <span>For sale</span>
-            <!-- <span>{{ myInfo.sellingCatNum }}</span> -->
-            <span>0</span>
+            <span>{{ myInfo.sellingCatNum }}</span>
+            <!-- <span>0</span> -->
           </div>
         </div>
         <div class="top_item">
           <div class="one mar">
             <span>Service charge for breeding cats</span>
-            <!-- <span>{{ myInfo.breedingFeeAmount }}</span> -->
-            <span>0</span>
+            <span>{{ myInfo.breedingFeeAmount }}</span>
+            <!-- <span>0</span> -->
           </div>
           <!-- <div class="one">
             <span></span>
@@ -101,22 +67,15 @@
         </div>
       </div>
       <div class="center">Hottest Artworks in 2 Weeks</div>
-      <!-- <div class="bottom">
-        <img src="../assets/img/cat1.png" alt="cat" class="out" />
-        <img src="../assets/img/cat2.png" alt="cat" />
-        <img src="../assets/img/cat3.png" alt="cat" />
-        <img src="../assets/img/cat4.png" alt="cat" />
-        <img src="../assets/img/cat5.png" alt="cat" class="out" />
-        <img src="../assets/img/cat6.png" alt="cat" />
-        <img src="../assets/img/cat7.png" alt="cat" />
-        <img src="../assets/img/cat8.png" alt="cat" />
-      </div> -->
-      <div class="catsbox">
+      <div
+        class="catsbox"
+        v-loading.fullscreen.lock="fullscreenLoading"
+        element-loading-background="rgba(255, 255, 255, 0.2)"
+      >
         <div
-          class="cats_item"
+          class="cats_item1"
           v-for="(cat, index) in sellingCatInfos"
           :key="index"
-          @click="buyCat(cat.Id, cat.price)"
         >
           <!-- @click="$router.push({ path: '/NFTMarketplace' })" -->
           <!-- <img src="../assets/img/item1.png" class="item_imgs" /> -->
@@ -124,7 +83,6 @@
           <div class="item_center">
             <div class="center_top">
               <span class="center_top_text">{{ cat.name }}</span>
-              <!-- <img src="../assets/img/lock.png" /> -->
               <span class="name">ID: {{ cat.Id }}</span>
             </div>
             <span class="name"
@@ -134,85 +92,10 @@
               >Price: {{ getReadableNumber2(cat.price, 18, 2) }} TOM</span
             >
           </div>
-          <div class="item_bottom">Buy Now</div>
+          <div class="item_bottom" @click="buyCat(cat.Id, cat.price)">
+            Buy Now
+          </div>
         </div>
-        <!-- <div class="cats_item">
-          <img src="../assets/img/item2.png" class="item_imgs" />
-          <div class="item_center">
-            <div class="center_top">
-              <span class="center_top_text">Crookshacks Cat</span>
-              <img src="../assets/img/sell.png" />
-            </div>
-            <span class="name">Jack Valentine</span>
-          </div>
-          <div class="item_bottom">99 TOM</div>
-        </div> -->
-        <!-- <div class="cats_item">
-          <img src="../assets/img/item3.png" class="item_imgs" />
-          <div class="item_center">
-            <div class="center_top">
-              <span class="center_top_text">Crookshacks Cat</span>
-              <img src="../assets/img/lock.png" />
-            </div>
-            <span class="name">Jack Valentine</span>
-          </div>
-          <div class="item_bottom">99 TOM</div>
-        </div> -->
-        <!-- <div class="cats_item" style="margin-right: 0">
-          <img src="../assets/img/item4.png" class="item_imgs" />
-          <div class="item_center">
-            <div class="center_top">
-              <span class="center_top_text">Crookshacks Cat</span>
-              <img src="../assets/img/sell.png" />
-            </div>
-            <span class="name">Jack Valentine</span>
-          </div>
-          <div class="item_bottom">99 TOM</div>
-        </div> -->
-        <!-- <div class="cats_item">
-          <img src="../assets/img/item5.png" class="item_imgs" />
-          <div class="item_center">
-            <div class="center_top">
-              <span class="center_top_text">Crookshacks Cat</span>
-              <img src="../assets/img/lock.png" />
-            </div>
-            <span class="name">Jack Valentine</span>
-          </div>
-          <div class="item_bottom">99 TOM</div>
-        </div>
-        <div class="cats_item">
-          <img src="../assets/img/item6.png" class="item_imgs" />
-          <div class="item_center">
-            <div class="center_top">
-              <span class="center_top_text">Crookshacks Cat</span>
-              <img src="../assets/img/sell.png" />
-            </div>
-            <span class="name">Jack Valentine</span>
-          </div>
-          <div class="item_bottom">99 TOM</div>
-        </div>
-        <div class="cats_item">
-          <img src="../assets/img/item7.png" class="item_imgs" />
-          <div class="item_center">
-            <div class="center_top">
-              <span class="center_top_text">Crookshacks Cat</span>
-              <img src="../assets/img/lock.png" />
-            </div>
-            <span class="name">Jack Valentine</span>
-          </div>
-          <div class="item_bottom nocat">Connect to a Wallet</div>
-        </div>
-        <div class="cats_item" style="margin-right: 0">
-          <img src="../assets/img/item8.png" class="item_imgs" />
-          <div class="item_center">
-            <div class="center_top">
-              <span class="center_top_text">Crookshacks Cat</span>
-              <img src="../assets/img/sell.png" />
-            </div>
-            <span class="name">Jack Valentine</span>
-          </div>
-          <div class="item_bottom">99 TOM</div>
-        </div> -->
       </div>
       <div class="see"><router-link to="/cats">See More</router-link></div>
     </div>
@@ -270,6 +153,51 @@
         <span>About Us</span>
       </div>
     </div>
+    <!-- 购买Dialog -->
+    <el-dialog
+      title="Buy Cats"
+      :visible.sync="centerDialogVisible"
+      width="40%"
+      center
+    >
+      <!-- <el-form
+        :model="numberValidateForm"
+        ref="numberValidateForm"
+        label-width="100px"
+        class="demo-ruleForm"
+      > -->
+      <!-- <el-form-item
+            label="Sell Price"
+            prop="price"
+            :rules="[
+              { required: true, message: 'The price cannot be empty.' },
+              { type: 'number', message: 'Price must be numeric' },
+            ]"
+          >
+            <el-input
+              type="price"
+              v-model.number="numberValidateForm.price"
+              autocomplete="off"
+            ></el-input>
+          </el-form-item> -->
+      <el-form-item v-if="!approvedTomERC20">
+        <el-button
+          type="warning"
+          style="margin-left: 40%; transform: translateX(-50%)"
+          @click="approveTomERC20()"
+          >{{ approveCatNFTTip }}</el-button
+        >
+      </el-form-item>
+      <el-form-item v-else>
+        <el-button
+          type="warning"
+          style="margin-left: 40%; transform: translateX(-50%)"
+          @click="buyCatConfirm()"
+          >{{ submit }}</el-button
+        >
+      </el-form-item>
+      <!-- </el-form> -->
+    </el-dialog>
   </div>
 </template>
 
@@ -277,38 +205,34 @@
 import EthCrypto from "eth-crypto";
 import BigNumber from "bignumber.js";
 import * as utils from "../assets/js/Common/utils";
-import { Drizzle } from "@drizzle/store";
-import drizzleOptions from "../assets/js/Common/drizzleOptions";
 export default {
   name: "Home",
-  components: {},
-  // computed: {
-  //   tomCatNFT() {
-  //     return this.$store.state.drizzle.contracts.TomCatNFT;
-  //   },
-  //   tradeMarket() {
-  //     return this.$store.state.drizzle.contracts.TradeMarket;
-  //   },
-  //   tomERC20() {
-  //     return this.$store.state.drizzle.contracts.tomERC20;
-  //   },
-  // },
+  computed: {
+    tomCatNFT() {
+      return this.$store.state.drizzle.contracts.TomCatNFT;
+    },
+    tradeMarket() {
+      return this.$store.state.drizzle.contracts.TradeMarket;
+    },
+    tomERC20() {
+      return this.$store.state.drizzle.contracts.tomERC20;
+    },
+  },
   data() {
     return {
+      centerDialogVisible: false,
+      fullscreenLoading: true,
       sellingCatInfos: [],
+      allcats: [],
       curStakeId: null,
       ipfs: null,
       defaultIPFSHash: "QmNtWjcfKTkJNfErtFMPwMV9F5C5DRKGUTHi4yjigtXP4N",
       curCatInfo: {
         ipfsHash: "QmNtWjcfKTkJNfErtFMPwMV9F5C5DRKGUTHi4yjigtXP4N",
       },
+      approvedTomERC20: false,
       ipfsUrl: "https://ipfs.io/ipfs/",
-      // approveTip: "授权TOM",
-      // drizzleState: drizzle.store.getState(),
-      // accountAddr:
-      //   account != null
-      //     ? account
-      //     : "0x0000000000000000000000000000000000000000",
+      accountAddr: null,
       tomCatNFTInfo: { totalSupply: 0, breedingCatNum: 0, sellingCatNum: 0 }, // 总量，种猫数量，正在交易中的猫数量
       tradeMarketInfo: {
         totalAmount: 0,
@@ -323,54 +247,208 @@ export default {
         myCatInfos: [],
         mySellingCatInfos: [],
       }, // 账户拥有的猫总数，出售中猫咪数量，以及种猫手续费收入
-      catInfo: {},
-      approveTomERC20Tip: "授权Tom代币",
-      approveCatNFTTip: "授权猫咪NFT",
-      approvingTip: "授权中",
+      // catInfo: {},
+      // approveTomERC20Tip: "授权Tom代币",
+      // approveCatNFTTip: "授权猫咪NFT",
+      // approvingTip: "授权中",
       curCatNFTId: 0,
       priceDescending: true,
       pageSize: 10,
       curPage: 0,
-      approvedTom: 0,
-      isBreeding: false,
-      motherInfos: [],
+      approveCatNFTTip: "Authorized cat NFT",
+      approvingTip: "Authorizing...",
+      wait: "Waiting....",
+      submit: "Submit",
+      // approvedTom: 0,
+      // isBreeding: false,
+      // motherInfos: [],
     };
   },
   created() {
+    this.updateTomCatData();
+    this.updateTradeMarketData();
+    this.updateMyInfo();
     this.getMarket();
-    // let drizzle = new Drizzle(drizzleOptions);
-    // this.drizzleState = drizzle.store.getState();
-
-    // const { create, urlSource } = require("ipfs-http-client");
-    // this.ipfs = create({
-    //   host: "ipfs.infura.io",
-    //   port: "5001",
-    //   protocol: "https",
-    // });
-    // setTimeout(()=>{
-    //   this.updateTomCatData();
-    //   this.updateTradeMarketData();
-    //   this.updateMyInfo();
-    // },1000)
-
-    // setInterval(() => {
-    //   this.updateMyInfo();
-    //   this.updateTomCatData();
-    //   this.updateTradeMarketData();
-    // }, 60000);
-    // console.log(this.$store.state.tradeMarketInfo.sellingCatInfos);
-    // setTimeout(() => {
-    //   console.log(this.$store.state.tradeMarketInfo.sellingCatInfos);
-    //   this.sellingCatInfos = JSON.parse(
-    //     JSON.stringify(this.$store.state.tradeMarketInfo.sellingCatInfos)
-    //   );
-    // }, 1500);
   },
   methods: {
+    buyCat(catId, price) {
+      setTimeout(() => {
+        const tradeMarket = this.$store.state.drizzle.contracts.TradeMarket;
+        const tomERC20 = this.$store.state.drizzle.contracts.TomERC20;
+        const accountAddr = this.$store.state.accountAddr;
+        // if (accountAddr == null) {
+        //   return;
+        // }
+
+        this.curCatNFTId = catId;
+        console.log(this.curCatNFTId);
+        tomERC20.methods
+          .allowance(accountAddr, tradeMarket.address)
+          .call()
+          .then((amount) => {
+            console.log(amount);
+            if (new BigNumber(amount).gt(new BigNumber(price))) {
+              this.curStakeId = tradeMarket.methods["buyCat"].cacheSend(catId, {
+                from: accountAddr,
+              });
+              //return;
+              this.syncTxStatus(
+                () => {
+                  this.updateTomCatData();
+                  this.updateTradeMarketData();
+                  this.updateMyInfo();
+                  this.getMarket();
+                },
+                () => {}
+              );
+            } else {
+              //this.setState({ buyCatNFTVisible: true });
+              this.centerDialogVisible = true;
+            }
+          });
+      }, 1000);
+    },
+    approveTomERC20() {
+      setTimeout(() => {
+        let str = this.approveCatNFTTip;
+        const tradeMarket = this.$store.state.drizzle.contracts.TradeMarket,
+          tomERC20 = this.$store.state.drizzle.contracts.TomERC20,
+          accountAddr = this.$store.state.accountAddr;
+        if (this.approveCatNFTTip == this.approvingTip) return;
+        const curStakeId = tomERC20.methods["approve"].cacheSend(
+          tradeMarket.address,
+          "0x" + new BigNumber(1).shiftedBy(26).toString(16),
+          { from: accountAddr }
+        );
+        // this.setState({ approveTomERC20Tip: approvingTip, curStakeId });
+        this.curStakeId = curStakeId;
+        this.approveCatNFTTip = this.approvingTip;
+        this.syncTxStatus(
+          () => {
+            this.approvedTomERC20 = false;
+            this.approveCatNFTTip = str;
+            // this.setState({ approvedTomERC20: false, approveTomERC20Tip });
+          },
+          () => {
+            this.approveCatNFTTip = str;
+            //this.setState({ approveTomERC20Tip });
+          }
+        );
+      }, 1000);
+    },
+
+    buyCatConfirm() {
+      setTimeout(() => {
+        const tradeMarket = this.$store.state.drizzle.contracts.TradeMarket;
+        const accountAddr = this.$store.state.accountAddr;
+        if (accountAddr == null) return;
+        this.curStakeId = tradeMarket.methods["buyCat"].cacheSend(
+          this.curCatNFTId,
+          { from: accountAddr }
+        );
+        this.syncTxStatus(
+          () => {
+            this.updateTomCatData();
+            this.updateMyInfo();
+          },
+          () => {}
+        );
+      }, 1000);
+    },
+    getReadableNumber1(v, assetDecimal, displayDecimal) {
+      return utils.getReadableNumber(
+        this.tradeMarketInfo.totalAmount,
+        assetDecimal,
+        displayDecimal
+      );
+    },
+    getReadableNumber2(v, assetDecimal, displayDecimal) {
+      return utils.getReadableNumber(v, assetDecimal, displayDecimal);
+    },
+    updateTomCatData() {
+      const _this = this;
+      setTimeout(() => {
+        //总数量
+        this.tomCatNFT.methods
+          .totalSupply()
+          .call()
+          .then((v) => {
+            this.tomCatNFTInfo.totalSupply = v;
+          });
+        //种猫数量
+        this.tomCatNFT.methods
+          .breedingCatAmount()
+          .call()
+          .then((v) => {
+            this.tomCatNFTInfo.breedingCatNum = v;
+          });
+
+        this.tomCatNFT.methods
+          .balanceOf(this.tradeMarket.address)
+          .call()
+          .then(async (v) => {
+            this.tomCatNFTInfo.sellingCatNum = parseInt(v);
+            this.tradeMarketInfo.sellingCatIds = [];
+          });
+      }, 1000);
+    },
+    updateTradeMarketData() {
+      const _this = this;
+      setTimeout(() => {
+        this.tradeMarket.methods
+          .totalAmount()
+          .call()
+          .then((v) => {
+            this.tradeMarketInfo.totalAmount = v;
+          });
+        this.tradeMarket.methods
+          .breedingOwnerFee()
+          .call()
+          .then((v) => {
+            this.tradeMarketInfo.breedingOwnerFee = v;
+          });
+        this.tradeMarket.methods
+          .getDealedOrderNumber()
+          .call()
+          .then((v) => {
+            this.tradeMarketInfo.dealCount = v;
+          });
+      }, 1000);
+    },
+
+    updateMyInfo() {
+      setTimeout(() => {
+        this.$store.state.accountAddr != null
+          ? (this.accountAddr = this.$store.state.accountAddr)
+          : (this.accountAddr = "0x0000000000000000000000000000000000000000");
+        if (this.accountAddr == "0x0000000000000000000000000000000000000000")
+          return;
+        this.motherInfos = [0];
+        this.tradeMarket.methods
+          .sellingCatsNumber(this.accountAddr)
+          .call()
+          .then((v) => {
+            this.myInfo.sellingCatNum = v;
+
+            this.tomCatNFT.methods
+              .balanceOf(this.accountAddr)
+              .call()
+              .then((amount) => {
+                this.myInfo.totalAmount =
+                  parseInt(amount) + parseInt(this.myInfo.sellingCatNum);
+              });
+          });
+        this.tradeMarket.methods
+          .breedingCatOwnerFeeMap(this.accountAddr)
+          .call()
+          .then((v) => {
+            this.myInfo.breedingFeeAmount = v;
+          });
+      }, 1000);
+    },
     getMarket() {
       //交易市场
-      let drizzle = new Drizzle(drizzleOptions);
-      this.drizzleState = drizzle.store.getState();
+
       const { create, urlSource } = require("ipfs-http-client");
       this.ipfs = create({
         host: "ipfs.infura.io",
@@ -378,16 +456,18 @@ export default {
         protocol: "https",
       });
       setTimeout(() => {
-        const accountAddr = this.$store.state.accountAddr;
-        const TomCatNFT = drizzle.contracts.TomCatNFT;
-        const TradeMarket = drizzle.contracts.TradeMarket;
+        let accountAddr = this.$store.state.accountAddr;
+        accountAddr != null
+          ? (accountAddr = accountAddr)
+          : (accountAddr = "0x0000000000000000000000000000000000000000");
+
+        const TomCatNFT = this.tomCatNFT;
+        const TradeMarket = this.tradeMarket;
 
         TomCatNFT.methods
           .balanceOf(TradeMarket.address)
           .call()
           .then(async (v) => {
-            this.tomCatNFTInfo.sellingCatNum = parseInt(v);
-            // this.setState({tomCatNFTInfo});
             this.tradeMarketInfo.sellingCatIds = [];
 
             TradeMarket.methods
@@ -417,7 +497,6 @@ export default {
                       this.tradeMarketInfo.sellingCatInfos[catId].motherId =
                         catInfo.motherId;
                       this.tradeMarketInfo.sellingCatInfos[catId].Id = catId;
-                      //this.setState({tradeMarketInfo});
                     });
                   TomCatNFT.methods
                     .tokenURI(catId)
@@ -430,7 +509,6 @@ export default {
                         ipfsHash.length < 20
                           ? this.ipfsUrl + this.defaultIPFSHash
                           : this.ipfsUrl + ipfsHash;
-                      // this.setState({tradeMarketInfo});
                     });
                   TradeMarket.methods
                     .tokenOrderMap(catId)
@@ -441,255 +519,51 @@ export default {
                       }
                       this.tradeMarketInfo.sellingCatInfos[catId].price =
                         catInfo.price;
-                      // this.setState({tradeMarketInfo});
+                      this.allcats.push(
+                        this.tradeMarketInfo.sellingCatInfos[catId]
+                      );
                     });
                 });
               });
-            console.log(this.tradeMarketInfo.sellingCatInfos);
+
             setTimeout(() => {
-              this.sellingCatInfos = this.tradeMarketInfo.sellingCatInfos;
+              if (this.allcats.length > 4) {
+                this.sellingCatInfos = this.allcats.slice(0, 8);
+              } else {
+                this.sellingCatInfos = this.allcats;
+              }
+              this.fullscreenLoading = false;
             }, 1000);
           });
       }, 1000);
-      return;
-      //const accountAddr = state.accountAddr;
-      //	console.log(state.drizzle.contracts.TomCatNFT)
+    },
+    syncTxStatus(successCallback, failCallback) {
+      const intervalId = setInterval(() => {
+        // get the transaction states from the drizzle state
+        const drizzleState = this.$store.state.drizzle.store.getState();
+        const { transactions, transactionStack } = drizzleState;
+        // console.log(transactions);
+        // console.log(transactionStack);
+        console.log(this.curStakeId);
+        // get the transaction hash using our saved `stackId`
+        const txHash = transactionStack[this.curStakeId];
+        console.log("txHash", txHash, this.curStakeId, transactionStack);
+        // if transaction hash does not exist, don't display anything
+        if (!txHash) return;
+        console.log("transaction", transactions[txHash]);
+        if (transactions[txHash]) {
+          const status = transactions[txHash].status;
+          if (status == "pending") return;
 
-      console.log(state.tradeMarketInfo.sellingCatInfos);
-    },
-
-    getReadableNumber1(v, assetDecimal, displayDecimal) {
-      return utils.getReadableNumber(
-        this.tradeMarketInfo.totalAmount,
-        assetDecimal,
-        displayDecimal
-      );
-    },
-    getReadableNumber2(v, assetDecimal, displayDecimal) {
-      return utils.getReadableNumber(v, assetDecimal, displayDecimal);
-    },
-    buyCat(catId, price) {
-      const tradeMarket = this.$store.state.drizzle.contracts.TradeMarket;
-      const accountAddr = this.$store.state.accountAddr;
-      const tomERC20 = this.$store.state.drizzle.contracts.TomERC20;
-      // this.state.curCatNFTId = catId;
-      tomERC20.methods
-        .allowance(accountAddr, tradeMarket.address)
-        .call()
-        .then((amount) => {
-          if (new BigNumber(amount).gt(new BigNumber(price))) {
-            this.curStakeId = tradeMarket.methods["buyCat"].cacheSend(catId, {
-              from: accountAddr,
-            });
-            // this.syncTxStatus(
-            //   () => {
-            //     this.updateTomCatData();
-            //     this.updateTradeMarketData();
-            //     this.updateMyInfo();
-            //   },
-            //   () => {}
-            // );
+          if (status == "success") {
+            successCallback();
           } else {
-            //  this.setState({ buyCatNFTVisible: true });
+            failCallback();
           }
-        });
-    },
-    updateTomCatData() {
-      const _this = this;
-      setTimeout(() => {
-        //总数量
-        this.tomCatNFT.methods
-          .totalSupply()
-          .call()
-          .then((v) => {
-            this.tomCatNFTInfo.totalSupply = v;
-            // this.setState({tomCatNFTInfo});
-          });
-        //种猫数量
-        this.tomCatNFT.methods
-          .breedingCatAmount()
-          .call()
-          .then((v) => {
-            this.tomCatNFTInfo.breedingCatNum = v;
-            //this.setState({tomCatNFTInfo});
-          });
-        this.tomCatNFT.methods
-          .balanceOf(this.tradeMarket.address)
-          .call()
-          .then(async (v) => {
-            this.tomCatNFTInfo.sellingCatNum = parseInt(v);
-            // this.setState({tomCatNFTInfo});
-            this.tradeMarketInfo.sellingCatIds = [];
-            this.tradeMarket.methods
-              .getOrderIds(
-                0,
-                this.pageSize < this.tomCatNFTInfo.sellingCatNum
-                  ? this.pageSize
-                  : this.tomCatNFTInfo.sellingCatNum,
-                this.priceDescending
-              )
-              .call()
-              .then((catIds) => {
-                catIds.map((catId) => {
-                  this.tomCatNFT.methods
-                    .id2CatInfoMap(catId)
-                    .call()
-                    .then((catInfo) => {
-                      if (this.tradeMarketInfo.sellingCatInfos[catId] == null) {
-                        this.tradeMarketInfo.sellingCatInfos[catId] = {};
-                      }
-                      this.tradeMarketInfo.sellingCatInfos[catId].name =
-                        catInfo.name;
-                      this.tradeMarketInfo.sellingCatInfos[catId].desc =
-                        catInfo.desc;
-                      this.tradeMarketInfo.sellingCatInfos[catId].isBreeding =
-                        catInfo.isBreeding;
-                      this.tradeMarketInfo.sellingCatInfos[catId].motherId =
-                        catInfo.motherId;
-                      // this.setState({tradeMarketInfo});
-                    });
-                  this.tradeMarket.methods
-                    .tokenOrderMap(catId)
-                    .call()
-                    .then((catInfo) => {
-                      if (this.tradeMarketInfo.sellingCatInfos[catId] == null) {
-                        this.tradeMarketInfo.sellingCatInfos[catId] = {};
-                      }
-                      this.tradeMarketInfo.sellingCatInfos[catId].price =
-                        catInfo.price;
-                      //this.setState({tradeMarketInfo});
-                    });
-                });
-              });
-          });
-      }, 1000);
-    },
-    updateTradeMarketData() {
-      const _this = this;
-      setTimeout(() => {
-        //const { tradeMarket, tradeMarketInfo } = this.state;
-        this.tradeMarket.methods
-          .totalAmount()
-          .call()
-          .then((v) => {
-            this.tradeMarketInfo.totalAmount = v;
-            // this.setState({ tradeMarketInfo });
-          });
-        this.tradeMarket.methods
-          .breedingOwnerFee()
-          .call()
-          .then((v) => {
-            this.tradeMarketInfo.breedingOwnerFee = v;
-            // this.setState({ tradeMarketInfo });
-          });
-        this.tradeMarket.methods
-          .getDealedOrderNumber()
-          .call()
-          .then((v) => {
-            this.tradeMarketInfo.dealCount = v;
-            // this.setState({ tradeMarketInfo });
-          });
-      }, 1000);
-    },
-    updateTradeMarketData() {
-      // const { tradeMarket, tradeMarketInfo } = this.state;
-      this.tradeMarket.methods
-        .totalAmount()
-        .call()
-        .then((v) => {
-          this.tradeMarketInfo.totalAmount = v;
-          //this.setState({ tradeMarketInfo });
-        });
-      this.tradeMarket.methods
-        .breedingOwnerFee()
-        .call()
-        .then((v) => {
-          this.tradeMarketInfo.breedingOwnerFee = v;
-          //this.setState({ tradeMarketInfo });
-        });
-      this.tradeMarket.methods
-        .getDealedOrderNumber()
-        .call()
-        .then((v) => {
-          this.tradeMarketInfo.dealCount = v;
-          // this.setState({ tradeMarketInfo });
-        });
-    },
-    updateMyInfo() {
-      //const { tomCatNFT, tradeMarket, myInfo, accountAddr } = this.state;
-      //var { motherInfos } = this.state;
-      if (this.accountAddr == "0x0000000000000000000000000000000000000000")
+          clearInterval(intervalId);
+        }
         return;
-      this.motherInfos = [0];
-      this.tradeMarket.methods
-        .sellingCatsNumber(this.accountAddr)
-        .call()
-        .then((v) => {
-          this.myInfo.sellingCatNum = v;
-          this.tradeMarket.methods
-            .getSellingCats(this.accountAddr, 0, parseInt(v))
-            .call()
-            .then((ids) => {
-              ids.map((catId) => {
-                this.tomCatNFT.methods
-                  .id2CatInfoMap(catId)
-                  .call()
-                  .then((catInfo) => {
-                    if (this.myInfo.mySellingCatInfos[catId] == null) {
-                      this.myInfo.mySellingCatInfos[catId] = {};
-                    }
-                    this.myInfo.mySellingCatInfos[catId].name = catInfo.name;
-                    this.myInfo.mySellingCatInfos[catId].desc = catInfo.desc;
-                    this.myInfo.mySellingCatInfos[catId].isBreeding =
-                      catInfo.isBreeding;
-                    this.myInfo.mySellingCatInfos[catId].motherId =
-                      catInfo.motherId;
-                    this.setState({ myInfo });
-                  });
-              });
-              this.motherInfos.push(...ids);
-              //this.setState({myInfo, motherInfos});
-            });
-          this.tomCatNFT.methods
-            .balanceOf(this.accountAddr)
-            .call()
-            .then((amount) => {
-              this.myInfo.totalAmount =
-                parseInt(amount) + parseInt(this.myInfo.sellingCatNum);
-              //this.setState({myInfo});
-              for (var i = 0; i < parseInt(amount); i++) {
-                this.tomCatNFT.methods
-                  .tokenOfOwnerByIndex(this.accountAddr, i)
-                  .call()
-                  .then((catId) => {
-                    this.tomCatNFT.methods
-                      .id2CatInfoMap(catId)
-                      .call()
-                      .then((catInfo) => {
-                        if (this.myInfo.myCatInfos[catId] == null) {
-                          this.myInfo.myCatInfos[catId] = {};
-                        }
-                        this.myInfo.myCatInfos[catId].name = catInfo.name;
-                        this.myInfo.myCatInfos[catId].desc = catInfo.desc;
-                        this.myInfo.myCatInfos[catId].isBreeding =
-                          catInfo.isBreeding;
-                        this.myInfo.myCatInfos[catId].motherId =
-                          catInfo.motherId;
-                        //this.setState({myInfo});
-                      });
-                    this.motherInfos.push(catId);
-                    // this.setState({myInfo, motherInfos});
-                  });
-              }
-            });
-        });
-      this.tradeMarket.methods
-        .breedingCatOwnerFeeMap(this.accountAddr)
-        .call()
-        .then((v) => {
-          this.myInfo.breedingFeeAmount = v;
-          // this.setState({myInfo});
-        });
+      }, 3000);
     },
   },
 };

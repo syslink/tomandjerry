@@ -35,7 +35,8 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: flex-start;
-  margin-top: 74px;
+  margin-top: 150px;
+  margin-bottom: 50px;
 }
 .top_item{
   height: 100%;
@@ -53,15 +54,15 @@
   width: 100%;
 }
 .mar{
-  margin-bottom: 15px;
+  margin-bottom: 5px;
 }
 .one :first-child{
-  font-size: 12px;
+  font-size: 14px;
   color: #9F786D;
   font-family: "Futura Bk BT Book";
 }
 .one :last-child{
-  font-size: 20px;
+  font-size: 25px;
   color: #532E34;
   font-family: "Futura Bk BT Book";
   font-weight: bold;
@@ -254,13 +255,13 @@
   flex-wrap: wrap;
   margin-top: 20px;
 }
-.cats_item{
+.cats_item1{
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
   width: 260px;
-  margin-right: 16px;
+  margin: 0 7px;
   margin-bottom: 25px;
 }
 .cats_item:hover{
@@ -318,4 +319,7 @@
 }
 .nocat{
   background: url(../../img/nocat.png)no-repeat;
+}
+.cats_item1:hover{
+  cursor: pointer;
 }

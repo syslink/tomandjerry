@@ -11,7 +11,9 @@
         >NFT Marketplace</router-link
       >
       <span class="line">/</span>
-      <router-link to="/me" exact style="margin: 0 10px">Me</router-link>
+      <router-link to="/me/MyPurchase" exact style="margin: 0 10px"
+        >Me</router-link
+      >
       <span class="bns" style="margin-left: 30px; margin-right: 10px"
         >Airdrop TOM Test Coin</span
       >

@@ -201,15 +201,17 @@
   align-items: flex-start;
 }
 .upload_rules{
+  width: 535px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  font-family: 'SanvitoPro-BoldDisp'; 
-  font-size: 14px;
+  /* font-family: 'SanvitoPro-BoldDisp';  */
+  font-size: 16px;
   color: #8A6358;
   line-height: 30px;
   margin-left: 10px;
+  letter-spacing: 1px;
 }
 .redio_item:hover,.el-input__inner:hover{
   cursor: pointer;
@@ -264,4 +266,65 @@
 
 input::-webkit-input-placeholder{
   color: #C4B6A2!important;
+}
+.select_menu{
+  width: 90%;
+  height: 90%;
+  border: none;
+  background: #F4EDDB;
+  outline: none;
+}
+.a-upload {
+  /* padding: 4px 10px;
+  height: 20px; */
+  width: 100%;
+  height: 100%;
+  line-height: 52px;
+  position: relative;
+  cursor: pointer;
+  color: #888;
+  /* background: #fafafa;
+  border: 1px solid #ddd; */
+  /* border-radius: 4px; */
+  overflow: hidden;
+  display: inline-block;
+  *display: inline;
+  *zoom: 1;
+  color: #C4B6A2!important;
+}
+
+.a-upload  input {
+  position: absolute;
+  font-size: 100px;
+  right: 0;
+  top: 0;
+  opacity: 0;
+  filter: alpha(opacity=0);
+  cursor: pointer
+}
+
+/* .a-upload:hover {
+  color: #444;
+  background: #eee;
+  border-color: #ccc;
+  text-decoration: none
+} */
+.uploadbox{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0 3%;
+  width: calc(535px - 6%);
+  position: relative;
+}
+.fileurl{
+  margin-left: 10px;
+  color: #532E34;
+  font-size: 18px;
+  font-family: 'SanvitoPro-BoldDisp'; 
+  position: absolute;
+  right: 3%;
+  top: 50%;
+  transform: translateY(-50%);
 }
