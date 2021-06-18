@@ -15,12 +15,12 @@
         >Me</router-link
       >
       <span class="line">/</span>
-      <a
+      <!-- <a
         href="https://testnft.tom.tt/TOMNFTWhitePaper.pdf"
         target="_blank"
         style="margin-left: 10px"
         >White Paper</a
-      >
+      > -->
       <span
         class="bns"
         style="margin-left: 30px; margin-right: 10px"
