@@ -20,15 +20,6 @@ export default {
     this.connectWallet(); //链接钱包
     let drizzle = await new Drizzle(drizzleOptions);
     this.$store.state.drizzle = drizzle;
-    // console.log(typeof drizzle);
-    // this.$store.dispatch("setDrizzle", drizzle);
-    // sessionStorage.setItem("drizzle", JSON.stringify(drizzle));
-    //await (this.$store.state.drizzle = drizzle);
-
-    // setTimeout(() => {
-    //   this.$store.dispatch("getMyCatInfos");
-    //   this.$store.dispatch("getTradeMarketInfo");
-    // }, 500);
   },
   methods: {},
 };

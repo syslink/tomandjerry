@@ -14,7 +14,7 @@
         :key="index"
       >
         <!-- @click="$router.push({ path: '/NFTMarketplace' })" -->
-        <img src="../../assets/img/cat.jpeg" class="item_imgsaa" />
+        <img :src="cat.ipfsHash" alt="cat" class="item_imgsaa" />
         <!-- <img :src="cat.ipfsHash" class="item_imgsaa" /> -->
         <div class="item_centeraa">
           <div class="center_top">
@@ -94,17 +94,22 @@ export default {
       curCatNFTId: 0,
       curCatInfo: null,
       ipfs: null,
-      defaultIPFSHash: "QmNtWjcfKTkJNfErtFMPwMV9F5C5DRKGUTHi4yjigtXP4N",
+      defaultIPFSHash: "QmacK2mcZtkm4v3JapqsKE9jinYdf1uVzV6ZSzRdEu7vyP",
       curCatInfo: {
-        ipfsHash: "QmNtWjcfKTkJNfErtFMPwMV9F5C5DRKGUTHi4yjigtXP4N",
+        ipfsHash: "QmacK2mcZtkm4v3JapqsKE9jinYdf1uVzV6ZSzRdEu7vyP",
       },
       ipfsUrl: "https://ipfs.io/ipfs/",
+      tradeMarketInfo: {
+        totalAmount: 0,
+        dealCount: 0,
+        breedingOwnerFee: 0,
+        sellingCatInfos: {},
+      }, // 总交易金额，总交易量，种猫拥有者的手续费收入
       myInfo: {
         totalAmount: 0,
         sellingCatNum: 0,
         breedingFeeAmount: 0,
         myCatInfos: [],
-        motherInfos: [],
         mySellingCatInfos: [],
       }, // 账户拥有的猫总数，出售中猫咪数量，以及种猫手续费收入
       allcats: [],
@@ -121,7 +126,6 @@ export default {
 
   methods: {
     getMyCatInfos() {
-      this.loading = true;
       this.myInfo.myCatInfos = [];
       const { create, urlSource } = require("ipfs-http-client");
       this.ipfs = create({
@@ -131,14 +135,16 @@ export default {
       });
       setTimeout(() => {
         let accountAddr = this.$store.state.accountAddr;
-        if (accountAddr == null) {
-          accountAddr = "0x0000000000000000000000000000000000000000";
-        }
-        if (accountAddr == "0x0000000000000000000000000000000000000000") {
-          this.loading = false;
+        if (
+          accountAddr == null ||
+          accountAddr == "" ||
+          accountAddr == undefined
+        ) {
           return;
         }
+
         const TomCatNFT = this.$store.state.drizzle.contracts.TomCatNFT;
+        this.loading = true;
         TomCatNFT.methods
           .balanceOf(accountAddr)
           .call()
@@ -172,11 +178,14 @@ export default {
                         .tokenURI(catId)
                         .call()
                         .then((ipfsHash) => {
-                          ipfsHash.length < 20
-                            ? (ipfsHash = this.defaultIPFSHash)
-                            : ipfsHash;
+                          // console.log(ipfsHash);
+                          if (this.myInfo.myCatInfos[catId] == null) {
+                            this.myInfo.myCatInfos[catId] = {};
+                          }
                           this.myInfo.myCatInfos[catId].ipfsHash =
-                            this.ipfsUrl + ipfsHash;
+                            ipfsHash.length < 20
+                              ? this.ipfsUrl + this.defaultIPFSHash
+                              : this.ipfsUrl + ipfsHash;
                         });
                     });
                 });
@@ -186,8 +195,12 @@ export default {
                 return item !== null;
               });
               this.loading = false;
+              console.log(this.myInfo.myCatInfos);
             }, 1000);
             // console.log(JSON.parse(JSON.stringify(this.myInfo.myCatInfos)));
+          })
+          .catch((value) => {
+            this.loading = false;
           });
       }, 1000);
     },
@@ -210,10 +223,12 @@ export default {
       this.syncTxStatus(
         () => {
           this.approvedTomCatNFT = true;
-          this.approveCatNFTTip = this.approveCatNFTTip;
+          this.approveCatNFTTip = "Authorized cat NFT";
+          //this.approveCatNFTTip = this.approveCatNFTTip;
         },
         () => {
-          this.approveCatNFTTip = this.approveCatNFTTip;
+          //this.approveCatNFTTip = this.approveCatNFTTip;
+          this.approveCatNFTTip = "Authorized cat NFT";
         }
       );
     },
@@ -238,10 +253,18 @@ export default {
           this.submit = this.wait;
           this.syncTxStatus(
             () => {
+              this.approvedTomCatNFT = false;
+              this.submit = "Submit";
+              this.numberValidateForm.price = "";
               this.centerDialogVisible = false;
               this.getMyCatInfos();
             },
-            () => {}
+            () => {
+              this.approvedTomCatNFT = false;
+              this.submit = "Submit";
+              this.numberValidateForm.price = "";
+              this.centerDialogVisible = false;
+            }
           );
         } else {
           return false;

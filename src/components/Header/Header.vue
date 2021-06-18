@@ -14,7 +14,17 @@
       <router-link to="/me/MyPurchase" exact style="margin: 0 10px"
         >Me</router-link
       >
-      <span class="bns" style="margin-left: 30px; margin-right: 10px"
+      <span class="line">/</span>
+      <a
+        href="https://testnft.tom.tt/TOMNFTWhitePaper.pdf"
+        target="_blank"
+        style="margin-left: 10px"
+        >White Paper</a
+      >
+      <span
+        class="bns"
+        style="margin-left: 30px; margin-right: 10px"
+        @click="airdropTom()"
         >Airdrop TOM Test Coin</span
       >
       <span class="bns" style="margin-right: 10px" v-if="isConnected">{{
@@ -71,6 +81,20 @@ export default {
         // this.$emit("connectedWallet");
         this.connectWallet();
       }
+    },
+    airdropTom() {
+      setTimeout(() => {
+        let accountAddr = this.$store.state.accountAddr;
+        if (
+          accountAddr == null ||
+          accountAddr == "" ||
+          accountAddr == undefined
+        ) {
+          return;
+        }
+        const airdropTom = this.$store.state.drizzle.contracts.AirdropTom;
+        airdropTom.methods["airdrop"].cacheSend({ from: accountAddr });
+      }, 1000);
     },
   },
 };

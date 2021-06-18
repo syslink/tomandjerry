@@ -14,7 +14,7 @@
         :key="index"
       >
         <!-- @click="$router.push({ path: '/NFTMarketplace' })" -->
-        <img src="../../assets/img/cat.jpeg" class="item_imgsaa" />
+        <img :src="cat.ipfsHash" alt="cat" class="item_imgsaa" />
         <!-- <img :src="cat.ipfsHash" class="item_imgsaa" /> -->
         <div class="item_centeraa">
           <div class="center_top">
@@ -42,9 +42,9 @@ export default {
     return {
       loading: false,
       ipfs: null,
-      defaultIPFSHash: "QmNtWjcfKTkJNfErtFMPwMV9F5C5DRKGUTHi4yjigtXP4N",
+      defaultIPFSHash: "QmacK2mcZtkm4v3JapqsKE9jinYdf1uVzV6ZSzRdEu7vyP",
       curCatInfo: {
-        ipfsHash: "QmNtWjcfKTkJNfErtFMPwMV9F5C5DRKGUTHi4yjigtXP4N",
+        ipfsHash: "QmacK2mcZtkm4v3JapqsKE9jinYdf1uVzV6ZSzRdEu7vyP",
       },
       ipfsUrl: "https://ipfs.io/ipfs/",
       myInfo: {
@@ -71,7 +71,7 @@ export default {
       });
       const accountAddr = this.$store.state.accountAddr;
       if (accountAddr == null) {
-        accountAddr = "0x0000000000000000000000000000000000000000";
+        return;
       }
       const tradeMarket = this.$store.state.drizzle.contracts.TradeMarket;
       const curStakeId = tradeMarket.methods["cancelOrder"].cacheSend(
@@ -102,14 +102,10 @@ export default {
         if (accountAddr == null || accountAddr == "") {
           this.loading = false;
           return;
-          //accountAddr = "0x0000000000000000000000000000000000000000";
         }
-        // if (accountAddr == "0x0000000000000000000000000000000000000000") {
-        //   this.loading = false;
-        //   return;
-        // }
         const tradeMarket = this.$store.state.drizzle.contracts.TradeMarket;
         const tomCatNFT = this.$store.state.drizzle.contracts.TomCatNFT;
+
         tradeMarket.methods
           .sellingCatsNumber(accountAddr)
           .call()
@@ -118,7 +114,6 @@ export default {
               .getSellingCats(accountAddr, 0, parseInt(v))
               .call()
               .then((ids) => {
-                console.log(ids);
                 ids.map((catId) => {
                   tomCatNFT.methods
                     .id2CatInfoMap(catId)
@@ -154,6 +149,9 @@ export default {
                   );
                   this.loading = false;
                 }, 1000);
+              })
+              .catch((value) => {
+                this.loading = false;
               });
           });
       }, 1000);

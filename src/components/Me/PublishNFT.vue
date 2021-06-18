@@ -97,9 +97,9 @@ export default {
       RadioChecked: RadioChecked,
       RadioDefault: RadioDefault,
       ipfs: null,
-      defaultIPFSHash: "QmNtWjcfKTkJNfErtFMPwMV9F5C5DRKGUTHi4yjigtXP4N",
+      defaultIPFSHash: "QmacK2mcZtkm4v3JapqsKE9jinYdf1uVzV6ZSzRdEu7vyP",
       curCatInfo: {
-        ipfsHash: "QmNtWjcfKTkJNfErtFMPwMV9F5C5DRKGUTHi4yjigtXP4N",
+        ipfsHash: "QmacK2mcZtkm4v3JapqsKE9jinYdf1uVzV6ZSzRdEu7vyP",
       },
       ipfsUrl: "https://ipfs.io/ipfs/",
       createdCatName: "",
@@ -217,8 +217,11 @@ export default {
       this.syncTxStatus(
         () => {
           loading.close();
+          this.$router.push("/me/MyPurchase");
         },
-        () => {}
+        () => {
+          loading.close();
+        }
       );
       console.log(
         this.createdCatName,
