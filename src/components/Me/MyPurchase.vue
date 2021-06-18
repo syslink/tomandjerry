@@ -45,11 +45,16 @@
         >
           <div class="Description">
             <span>Description of sale.</span>
-            <span>1. Authorized NFT market.</span>
-            <span
-              >2.After the authorization is successful, submit the confirmation
-              transaction</span
-            >
+            <div v-if="!isauthon">
+              <span>1. Authorized NFT market.</span>
+              <span
+                >2.After the authorization is successful, submit the
+                confirmation transaction</span
+              >
+            </div>
+            <div v-else>
+              <span>1.Place submit the confirmation transaction</span>
+            </div>
           </div>
           <el-form-item
             label="Sell Price"
@@ -129,6 +134,7 @@ export default {
       approvingTip: "Authorizing...",
       wait: "Waiting....",
       submit: "Submit",
+      isauthon: false,
     };
   },
   created() {
@@ -302,6 +308,7 @@ export default {
           //console.log(v);
           if (v == "0x9555396929c805C859f01945b023dDeF9d65e6E0") {
             this.approvedTomCatNFT = true;
+            this.isauthon = true;
           }
           this.centerDialogVisible = true;
         });

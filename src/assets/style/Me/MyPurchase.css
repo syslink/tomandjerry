@@ -136,6 +136,12 @@
   align-items: flex-start;
   margin-bottom: 10px;
 }
+.Description div{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
 .Description span{
   margin: 3px 0;
   font-size: 16px;
