@@ -47,13 +47,10 @@
             <span>Description of sale.</span>
             <div v-if="!isauthon">
               <span>1. Authorized NFT market.</span>
-              <span
-                >2.After the authorization is successful, submit the
-                confirmation transaction</span
-              >
+              <span>2.submit transaction</span>
             </div>
             <div v-else>
-              <span>1.Place submit the confirmation transaction</span>
+              <span>1.submit transaction</span>
             </div>
           </div>
           <el-form-item
@@ -290,6 +287,8 @@ export default {
       });
     },
     sellCat(catInfo) {
+      this.approvedTomCatNFT = false;
+      this.isauthon = false;
       const tradeMarket = this.$store.state.drizzle.contracts.TradeMarket;
       const tomCatNFT = this.$store.state.drizzle.contracts.TomCatNFT;
       const accountAddr = this.$store.state.accountAddr;
