@@ -43,6 +43,14 @@
           label-width="100px"
           class="demo-ruleForm"
         >
+          <div class="Description">
+            <span>Description of sale.</span>
+            <span>1. Authorized NFT market.</span>
+            <span
+              >2.After the authorization is successful, submit the confirmation
+              transaction</span
+            >
+          </div>
           <el-form-item
             label="Sell Price"
             prop="price"
@@ -198,7 +206,7 @@ export default {
                 return item !== null;
               });
               this.loading = false;
-              console.log(this.myInfo.myCatInfos);
+              //console.log(this.myInfo.myCatInfos);
             }, 1000);
             // console.log(JSON.parse(JSON.stringify(this.myInfo.myCatInfos)));
           })
@@ -286,7 +294,17 @@ export default {
         .isApprovedForAll(accountAddr, tradeMarket.address)
         .call()
         .then((v) => {});
-      this.centerDialogVisible = true;
+      // console.log(this.curCatNFTId);
+      tomCatNFT.methods
+        .getApproved(this.curCatNFTId)
+        .call()
+        .then((v) => {
+          //console.log(v);
+          if (v == "0x9555396929c805C859f01945b023dDeF9d65e6E0") {
+            this.approvedTomCatNFT = true;
+          }
+          this.centerDialogVisible = true;
+        });
     },
     syncTxStatus(successCallback, failCallback) {
       const intervalId = setInterval(() => {
