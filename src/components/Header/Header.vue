@@ -14,7 +14,6 @@
       <router-link to="/me/MyPurchase" exact style="margin: 0 10px"
         >Me</router-link
       >
-      <span class="line">/</span>
       <!-- <a
         href="https://testnft.tom.tt/TOMNFTWhitePaper.pdf"
         target="_blank"
