@@ -84,6 +84,7 @@
   </div>
 </template>
 <script>
+import BigNumber from "bignumber.js";
 export default {
   name: "MyPurchase",
   data() {
@@ -245,11 +246,6 @@ export default {
             new BigNumber(this.numberValidateForm.price)
               .shiftedBy(18)
               .toString(16);
-          // this.numberValidateForm.price + "000000000000000000";
-
-          //console.log(tradeMarket);
-
-          //console.log(accountAddr, curCatNFTId, sellPrice);
           if (this.submit == this.wait) return;
 
           const curStakeId = tradeMarket.methods["addOrder"].cacheSend(
