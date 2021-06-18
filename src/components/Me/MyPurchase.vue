@@ -55,7 +55,9 @@
               type="price"
               v-model.number="numberValidateForm.price"
               autocomplete="off"
-            ></el-input>
+            >
+              <template slot="append">TOM</template>
+            </el-input>
           </el-form-item>
           <el-form-item v-if="!approvedTomCatNFT">
             <el-button
@@ -238,7 +240,13 @@ export default {
           const tradeMarket = this.$store.state.drizzle.contracts.TradeMarket;
           const accountAddr = this.$store.state.accountAddr;
           const curCatNFTId = this.curCatNFTId;
-          const sellPrice = this.numberValidateForm.price;
+          const sellPrice =
+            "0x" +
+            new BigNumber(this.numberValidateForm.price)
+              .shiftedBy(18)
+              .toString(16);
+          // this.numberValidateForm.price + "000000000000000000";
+
           //console.log(tradeMarket);
 
           //console.log(accountAddr, curCatNFTId, sellPrice);
