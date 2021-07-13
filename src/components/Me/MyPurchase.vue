@@ -14,14 +14,22 @@
         :key="index"
       >
         <!-- @click="$router.push({ path: '/NFTMarketplace' })" -->
-        <img :src="cat.ipfsHash" alt="cat" class="item_imgsaa" />
+        <img
+          :src="
+            cat.ipfsHash
+              ? cat.ipfsHash
+              : 'https://ipfs.io/ipfs/QmejgraCrkDLvVfS5koe2jk1zbfUv2ewLvtjh9m9hEcx3j'
+          "
+          alt="cat"
+          class="item_imgsaa"
+        />
         <!-- <img :src="cat.ipfsHash" class="item_imgsaa" /> -->
         <div class="item_centeraa">
           <div class="center_top">
             <span class="center_top_text">{{ cat.name }}</span>
-            <span class="name">ID:{{ cat.id }}</span>
+            <img :src="cat.isBreeding ? lock : sell" />
           </div>
-
+          <span class="name">ID:{{ cat.id }}</span>
           <span class="name"
             >isBreeding: {{ cat.isBreeding ? "YES" : "NO" }}</span
           >
@@ -95,10 +103,15 @@
 </template>
 <script>
 import BigNumber from "bignumber.js";
+let lock = require("../../assets/img/lock.png");
+let sell = require("../../assets/img/sell.png");
+
 export default {
   name: "MyPurchase",
   data() {
     return {
+      lock: lock,
+      sell: sell,
       loading: false,
       centerDialogVisible: false,
       numberValidateForm: {
@@ -134,21 +147,22 @@ export default {
       isauthon: false,
     };
   },
-  created() {
+  mounted() {
     this.getMyCatInfos();
   },
 
   methods: {
     getMyCatInfos() {
-      this.myInfo.myCatInfos = [];
-      const { create, urlSource } = require("ipfs-http-client");
-      this.ipfs = create({
-        host: "ipfs.infura.io",
-        port: "5001",
-        protocol: "https",
-      });
       setTimeout(() => {
+        this.myInfo.myCatInfos = [];
+        const { create, urlSource } = require("ipfs-http-client");
+        this.ipfs = create({
+          host: "ipfs.infura.io",
+          port: "5001",
+          protocol: "https",
+        });
         let accountAddr = this.$store.state.accountAddr;
+        //console.log(accountAddr);
         if (
           accountAddr == null ||
           accountAddr == "" ||
@@ -157,13 +171,13 @@ export default {
           return;
         }
 
-        const TomCatNFT = this.$store.state.drizzle.contracts.TomCatNFT;
+        const TomCatNFT = this.$drizzle.contracts.TomCatNFT;
         this.loading = true;
         TomCatNFT.methods
           .balanceOf(accountAddr)
           .call()
           .then((amount) => {
-            //console.log(amount)
+            //console.log(amount);
             this.myInfo.totalAmount =
               parseInt(amount) + parseInt(this.myInfo.sellingCatNum);
 
@@ -172,7 +186,7 @@ export default {
                 .tokenOfOwnerByIndex(accountAddr, i)
                 .call()
                 .then((catId) => {
-                  //	console.log(catId)
+                  // console.log(catId);
                   TomCatNFT.methods
                     .id2CatInfoMap(catId)
                     .call()
@@ -192,7 +206,7 @@ export default {
                         .tokenURI(catId)
                         .call()
                         .then((ipfsHash) => {
-                          // console.log(ipfsHash);
+                          //  console.log(ipfsHash);
                           if (this.myInfo.myCatInfos[catId] == null) {
                             this.myInfo.myCatInfos[catId] = {};
                           }
@@ -200,6 +214,8 @@ export default {
                             ipfsHash.length < 20
                               ? this.ipfsUrl + this.defaultIPFSHash
                               : this.ipfsUrl + ipfsHash;
+
+                          // console.log(this.myInfo.myCatInfos[catId].ipfsHash);
                         });
                     });
                 });
@@ -219,8 +235,8 @@ export default {
       }, 1000);
     },
     approveCatNFT() {
-      const tradeMarket = this.$store.state.drizzle.contracts.TradeMarket,
-        tomCatNFT = this.$store.state.drizzle.contracts.TomCatNFT,
+      const tradeMarket = this.$drizzle.contracts.TradeMarket,
+        tomCatNFT = this.$drizzle.contracts.TomCatNFT,
         accountAddr = this.$store.state.accountAddr,
         curCatNFTId = this.curCatNFTId;
 
@@ -243,13 +259,14 @@ export default {
         () => {
           //this.approveCatNFTTip = this.approveCatNFTTip;
           this.approveCatNFTTip = "Authorized cat NFT";
+          this.centerDialogVisible = false;
         }
       );
     },
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          const tradeMarket = this.$store.state.drizzle.contracts.TradeMarket;
+          const tradeMarket = this.$drizzle.contracts.TradeMarket;
           const accountAddr = this.$store.state.accountAddr;
           const curCatNFTId = this.curCatNFTId;
           const sellPrice =
@@ -287,24 +304,26 @@ export default {
       });
     },
     sellCat(catInfo) {
+      // console.log(1111);
+      // console.log(catInfo);
       this.approvedTomCatNFT = false;
       this.isauthon = false;
-      const tradeMarket = this.$store.state.drizzle.contracts.TradeMarket;
-      const tomCatNFT = this.$store.state.drizzle.contracts.TomCatNFT;
+      const tradeMarket = this.$drizzle.contracts.TradeMarket;
+      const tomCatNFT = this.$drizzle.contracts.TomCatNFT;
       const accountAddr = this.$store.state.accountAddr;
-      // const tomERC20 = this.$store.state.drizzle.contracts.TomERC20;
+      // const tomERC20 = this.$drizzle.contracts.TomERC20;
       this.curCatNFTId = catInfo.id;
       this.curCatInfo = catInfo;
       tomCatNFT.methods
         .isApprovedForAll(accountAddr, tradeMarket.address)
         .call()
         .then((v) => {});
-      // console.log(this.curCatNFTId);
+      //    console.log(this.curCatNFTId);
       tomCatNFT.methods
         .getApproved(this.curCatNFTId)
         .call()
         .then((v) => {
-          //console.log(v);
+          // console.log(v);
           if (v == "0x9555396929c805C859f01945b023dDeF9d65e6E0") {
             this.approvedTomCatNFT = true;
             this.isauthon = true;
@@ -315,11 +334,11 @@ export default {
     syncTxStatus(successCallback, failCallback) {
       const intervalId = setInterval(() => {
         // get the transaction states from the drizzle state
-        const drizzleState = this.$store.state.drizzle.store.getState();
+        const drizzleState = this.$drizzle.store.getState();
         const { transactions, transactionStack } = drizzleState;
         // console.log(transactions);
         // console.log(transactionStack);
-        console.log(this.curStakeId);
+        //  console.log(this.curStakeId);
         // get the transaction hash using our saved `stackId`
         const txHash = transactionStack[this.curStakeId];
         console.log("txHash", txHash, this.curStakeId, transactionStack);

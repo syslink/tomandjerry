@@ -3,7 +3,7 @@ import TomCatNFT from "../contracts/TomCatNFT.json";
 import TradeMarket from "../contracts/TradeMarket.json";
 import TomERC20 from "../contracts/ERC20.json";
 import AirdropTom from "../contracts/AirdropTom.json";
-
+import { Drizzle } from "@drizzle/store";
 
 
 TomCatNFT.networks['128'] = {address: '0xb99fD33a13e4402c10eBE32a3B8b399d6f3aBD3b'};
@@ -30,5 +30,4 @@ const options = {
   },
   //syncAlways: true,
 };
-// console.log(options)
 export default options;

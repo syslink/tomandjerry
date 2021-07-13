@@ -16,8 +16,9 @@
         <div class="item_center">
           <div class="center_top">
             <span class="center_top_text">{{ cat.name }}</span>
-            <span class="name">ID: {{ cat.Id }}</span>
+            <img :src="cat.isBreeding ? lock : sell" />
           </div>
+          <span class="name">ID: {{ cat.Id }}</span>
           <span class="name"
             >isBreeding: {{ cat.isBreeding ? "YES" : "NO" }}</span
           >
@@ -36,10 +37,15 @@
 import EthCrypto from "eth-crypto";
 import BigNumber from "bignumber.js";
 import * as utils from "../assets/js/Common/utils";
+import qs from "qs";
+let lock = require("../assets/img/lock.png");
+let sell = require("../assets/img/sell.png");
 export default {
   name: "Cats",
   data() {
     return {
+      lock: lock,
+      sell: sell,
       centerDialogVisible: false,
       fullscreenLoading: false,
       sellingCatInfos: [],
@@ -75,20 +81,75 @@ export default {
       approvingTip: "Authorizing...",
       wait: "Waiting....",
       submit: "Submit",
+      isAddress: false,
     };
   },
-  created() {
+  mounted() {
     this.updateTomCatData();
     this.updateTradeMarketData();
     this.updateMyInfo();
     this.getMarket();
+    this.getUserAddress();
   },
   methods: {
+    getUserAddress() {
+      setTimeout(() => {
+        const accountAddr = this.$store.state.accountAddr;
+        // console.log(accountAddr);
+        const url = this.$api.getUserInfor + "?walletAddress=" + accountAddr;
+        this.$axios
+          .get(url)
+          .then((userInfo) => {
+            // console.log(userInfo);
+            this.$axios({
+              method: "post",
+              headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+              },
+              url: this.$api.getAddressList,
+              data: qs.stringify({
+                customerId: userInfo.data.data.id,
+                apptoken: userInfo.data.data.apptoken,
+              }),
+            })
+              .then((addressList) => {
+                //console.log(addressList);
+                if (addressList.data.success) {
+                  if (addressList.data.data.length > 0) {
+                    this.isAddress = true;
+                  }
+                }
+              })
+              .catch((error) => {
+                console.log(error);
+              });
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }, 1000);
+    },
     buyCat(catId, price) {
       //购买
       setTimeout(() => {
-        const tradeMarket = this.$store.state.drizzle.contracts.TradeMarket;
-        const tomERC20 = this.$store.state.drizzle.contracts.TomERC20;
+        if (!this.isAddress) {
+          this.$confirm(
+            "You don't have a shipping address yet. Please add the shipping address in the personal center first!",
+            "Reminder",
+            {
+              confirmButtonText: "Confirm",
+              cancelButtonText: "Cancel",
+              type: "warning",
+            }
+          )
+            .then(() => {
+              this.$router.push("/me/ReceiverAddress");
+            })
+            .catch(() => {});
+          return;
+        }
+        const tradeMarket = this.$drizzle.contracts.TradeMarket;
+        const tomERC20 = this.$drizzle.contracts.TomERC20;
         const accountAddr = this.$store.state.accountAddr;
         if (accountAddr == null || accountAddr == "") {
           this.$message.error("Please link the Metamask wallet first!");
@@ -113,7 +174,9 @@ export default {
                   this.updateMyInfo();
                   this.getMarket();
                 },
-                () => {}
+                () => {
+                  this.centerDialogVisible = false;
+                }
               );
             } else {
               this.centerDialogVisible = true;
@@ -125,8 +188,8 @@ export default {
       //购买前授权
       setTimeout(() => {
         let str = this.approveCatNFTTip;
-        const tradeMarket = this.$store.state.drizzle.contracts.TradeMarket,
-          tomERC20 = this.$store.state.drizzle.contracts.TomERC20,
+        const tradeMarket = this.$drizzle.contracts.TradeMarket,
+          tomERC20 = this.$drizzle.contracts.TomERC20,
           accountAddr = this.$store.state.accountAddr;
         if (this.approveCatNFTTip == this.approvingTip) return;
         const curStakeId = tomERC20.methods["approve"].cacheSend(
@@ -144,6 +207,7 @@ export default {
           () => {
             this.approveCatNFTTip = str;
             this.approvedTomERC20 = false;
+            this.centerDialogVisible = false;
           }
         );
       }, 1000);
@@ -153,7 +217,7 @@ export default {
       //授权后确认购买
       setTimeout(() => {
         let str = this.submit;
-        const tradeMarket = this.$store.state.drizzle.contracts.TradeMarket;
+        const tradeMarket = this.$drizzle.contracts.TradeMarket;
         const accountAddr = this.$store.state.accountAddr;
         if (accountAddr == null) return;
         this.curStakeId = tradeMarket.methods["buyCat"].cacheSend(
@@ -174,6 +238,7 @@ export default {
           () => {
             this.approvedTomERC20 = false;
             this.submit = str;
+            this.centerDialogVisible = false;
           }
         );
       }, 1000);
@@ -200,9 +265,12 @@ export default {
           return;
         }
 
+        const TomCatNFT = this.$drizzle.contracts.TomCatNFT;
+        const TradeMarket = this.$drizzle.contracts.TradeMarket;
+        if (TomCatNFT == null || TomCatNFT == "" || TomCatNFT == undefined) {
+          return;
+        }
         this.fullscreenLoading = true;
-        const TomCatNFT = this.$store.state.drizzle.contracts.TomCatNFT;
-        const TradeMarket = this.$store.state.drizzle.contracts.TradeMarket;
         TomCatNFT.methods
           .balanceOf(TradeMarket.address)
           .call()
@@ -275,8 +343,8 @@ export default {
     updateTomCatData() {
       setTimeout(() => {
         //总数量
-        const tomCatNFT = this.$store.state.drizzle.contracts.TomCatNFT;
-        const tradeMarket = this.$store.state.drizzle.contracts.TradeMarket;
+        const tomCatNFT = this.$drizzle.contracts.TomCatNFT;
+        const tradeMarket = this.$drizzle.contracts.TradeMarket;
         tomCatNFT.methods
           .totalSupply()
           .call()
@@ -302,7 +370,7 @@ export default {
     },
     updateTradeMarketData() {
       setTimeout(() => {
-        const tradeMarket = this.$store.state.drizzle.contracts.TradeMarket;
+        const tradeMarket = this.$drizzle.contracts.TradeMarket;
         tradeMarket.methods
           .totalAmount()
           .call()
@@ -325,8 +393,8 @@ export default {
     },
     updateMyInfo() {
       setTimeout(() => {
-        const tradeMarket = this.$store.state.drizzle.contracts.TradeMarket;
-        const tomCatNFT = this.$store.state.drizzle.contracts.TomCatNFT;
+        const tradeMarket = this.$drizzle.contracts.TradeMarket;
+        const tomCatNFT = this.$drizzle.contracts.TomCatNFT;
         let accountAddr = this.$store.state.accountAddr;
         if (
           accountAddr == null ||
@@ -362,7 +430,7 @@ export default {
     syncTxStatus(successCallback, failCallback) {
       const intervalId = setInterval(() => {
         // get the transaction states from the drizzle state
-        const drizzleState = this.$store.state.drizzle.store.getState();
+        const drizzleState = this.$drizzle.store.getState();
         const { transactions, transactionStack } = drizzleState;
 
         // get the transaction hash using our saved `stackId`

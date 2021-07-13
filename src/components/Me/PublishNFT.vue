@@ -65,7 +65,28 @@
         </div>
       </div>
       <div class="ra_box_div2">
-        <span class="div2_left_text">Is Breed cat</span>
+        <span class="div2_left_text">Category</span>
+        <div class="redio_box">
+          <div class="redio_item redio_item_one" @click="isBreeding = true">
+            <div class="item_left">
+              <!-- <img :src="Category == 1 ? RadioChecked : RadioDefault" /> -->
+              <img :src="isBreeding ? RadioChecked : RadioDefault" />
+              <span>Financial card</span>
+            </div>
+            <img src="../../assets/img/lock@34.png" />
+          </div>
+          <div class="redio_item" @click="isBreeding = false">
+            <div class="item_left">
+              <!-- <img :src="Category == 2 ? RadioChecked : RadioDefault" /> -->
+              <img :src="!isBreeding ? RadioChecked : RadioDefault" />
+              <span>Physical card</span>
+            </div>
+            <img src="../../assets/img/sell@34.png" />
+          </div>
+        </div>
+      </div>
+      <!-- <div class="ra_box_div2">
+        <span class="div2_left_text">Category</span>
         <div class="redio_box">
           <div class="redio_item redio_item_one" @click="isBreeding = true">
             <div class="item_left">
@@ -80,7 +101,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
 
       <div class="addAddress" @click="createCatNFT">Publish NFT</div>
     </div>
@@ -115,7 +136,7 @@ export default {
       motherInfos: [0],
     };
   },
-  created() {
+  mounted() {
     const { create, urlSource } = require("ipfs-http-client");
     this.ipfs = create({
       host: "ipfs.infura.io",
@@ -126,10 +147,10 @@ export default {
   },
   computed: {
     tomCatNFT() {
-      return this.$store.state.drizzle.contracts.TomCatNFT;
+      return this.$drizzle.contracts.TomCatNFT;
     },
     tradeMarket() {
-      return this.$store.state.drizzle.contracts.TradeMarket;
+      return this.$drizzle.contracts.TradeMarket;
     },
   },
   methods: {
@@ -184,7 +205,7 @@ export default {
     },
 
     async createCatNFT() {
-      this.drizzleState = this.$store.state.drizzle.store.getState();
+      this.drizzleState = this.$drizzle.store.getState();
       //console.log(this.drizzleState);
       if (utils.isEmptyObj(this.createdCatName)) {
         this.toast("error", "Please enter a cat name");
@@ -234,7 +255,7 @@ export default {
     syncTxStatus(successCallback, failCallback) {
       const intervalId = setInterval(() => {
         // get the transaction states from the drizzle state
-        const drizzleState = this.$store.state.drizzle.store.getState();
+        const drizzleState = this.$drizzle.store.getState();
         const { transactions, transactionStack } = drizzleState;
 
         // get the transaction hash using our saved `stackId`

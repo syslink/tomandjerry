@@ -26,12 +26,13 @@
         @click="airdropTom()"
         >Airdrop TOM Test Coin</span
       >
-      <span class="bns" style="margin-right: 10px" v-if="isConnected">{{
+      <!-- <span class="bns" style="margin-right: 10px" v-if="isConnected">{{
         chainId
-      }}</span>
+      }}</span> -->
 
-      <span class="bns" @click="connectedWallet"
-        >{{ isConnected ? account : "Connect to a Wallet" }}
+      <span class="bns" @click="connectedWallet">
+        <img :src="chainId" class="webicon" />
+        {{ isConnected ? account : "Connect to a Wallet" }}
       </span>
       <span class="language">English</span>
       <img src="../../assets/img/set.png" class="setimg" />
@@ -41,12 +42,18 @@
 <script>
 import Web3 from "web3";
 import { myMixins } from "../../assets/js/Wallet/ConnectWallet";
+let hecoIcon = require("../../assets/img/heco-icon.png");
+let bscIcon = require("../../assets/img/bsc-icon.png");
+let ethIcon = require("../../assets/img/eth-icon.png");
 export default {
   mixins: [myMixins],
   name: "Header",
   data() {
     return {
       web3: null,
+      hecoIcon: hecoIcon,
+      bscIcon: bscIcon,
+      ethIcon: ethIcon,
     };
   },
   computed: {
@@ -55,13 +62,13 @@ export default {
       let chainID = "";
       switch (chainId) {
         case "128":
-          chainID = "HECO";
+          chainID = hecoIcon;
           break;
         case "56":
-          chainID = "BSC";
+          chainID = bscIcon;
           break;
         case "1":
-          chainID = "ETH";
+          chainID = ethIcon;
           break;
       }
       return chainID;
@@ -91,7 +98,9 @@ export default {
         ) {
           return;
         }
-        const airdropTom = this.$store.state.drizzle.contracts.AirdropTom;
+        console.log("airdropTom");
+        console.log(this.$drizzle);
+        const airdropTom = this.$drizzle.contracts.AirdropTom;
         airdropTom.methods["airdrop"].cacheSend({ from: accountAddr });
       }, 1000);
     },

@@ -24,7 +24,7 @@
     <div style="color: #e2c993">
       {{ $t("footer.foottxt") }}
     </div>
-    <div class="connect">
+    <!-- <div class="connect">
       <span
         style="margin-right: 20px"
         @mouseover="shangwu = true"
@@ -36,7 +36,7 @@
         ><img src="../../assets/img/weixin.png" />{{ $t("footer.shequ")
         }}<img src="../../assets/img/bg5.png" class="shequ" v-show="shequ"
       /></span>
-    </div>
+    </div> -->
   </div>
 </template>
 <script>
@@ -66,7 +66,7 @@ export default {
   background: #532e34;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   z-index: 99;
   padding: 0 20px;
@@ -77,6 +77,7 @@ export default {
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
+  margin-right: 100px;
 }
 .flow img {
   margin: 0 10px;

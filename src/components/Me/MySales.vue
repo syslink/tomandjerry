@@ -19,9 +19,9 @@
         <div class="item_centeraa">
           <div class="center_top">
             <span class="center_top_text">{{ cat.name }}</span>
-            <span class="name">ID:{{ cat.id }}</span>
+            <img :src="cat.isBreeding ? lock : sell" />
           </div>
-
+          <span class="name">ID:{{ cat.id }}</span>
           <span class="name"
             >isBreeding: {{ cat.isBreeding ? "YES" : "NO" }}</span
           >
@@ -36,10 +36,14 @@
   </div>
 </template>
 <script>
+let lock = require("../../assets/img/lock.png");
+let sell = require("../../assets/img/sell.png");
 export default {
   name: "MySales",
   data() {
     return {
+      lock: lock,
+      sell: sell,
       loading: false,
       ipfs: null,
       defaultIPFSHash: "QmacK2mcZtkm4v3JapqsKE9jinYdf1uVzV6ZSzRdEu7vyP",
@@ -59,7 +63,7 @@ export default {
       curStakeId: null,
     };
   },
-  created() {
+  mounted() {
     this.getMySellCatsInfo();
   },
   methods: {
@@ -73,7 +77,7 @@ export default {
       if (accountAddr == null) {
         return;
       }
-      const tradeMarket = this.$store.state.drizzle.contracts.TradeMarket;
+      const tradeMarket = this.$drizzle.contracts.TradeMarket;
       const curStakeId = tradeMarket.methods["cancelOrder"].cacheSend(
         catInfo.id,
         { from: accountAddr }
@@ -84,7 +88,9 @@ export default {
           this.getMySellCatsInfo();
           loading.close();
         },
-        () => {}
+        () => {
+          loading.close();
+        }
       );
     },
     getMySellCatsInfo() {
@@ -103,8 +109,8 @@ export default {
           this.loading = false;
           return;
         }
-        const tradeMarket = this.$store.state.drizzle.contracts.TradeMarket;
-        const tomCatNFT = this.$store.state.drizzle.contracts.TomCatNFT;
+        const tradeMarket = this.$drizzle.contracts.TradeMarket;
+        const tomCatNFT = this.$drizzle.contracts.TomCatNFT;
 
         tradeMarket.methods
           .sellingCatsNumber(accountAddr)
@@ -134,6 +140,7 @@ export default {
                     .tokenURI(catId)
                     .call()
                     .then((ipfsHash) => {
+                      //console.log(ipfsHash);
                       ipfsHash.length < 20
                         ? (this.myInfo.myCatInfos[catId].ipfsHash =
                             this.ipfsUrl + this.defaultIPFSHash)
@@ -159,7 +166,7 @@ export default {
     syncTxStatus(successCallback, failCallback) {
       const intervalId = setInterval(() => {
         // get the transaction states from the drizzle state
-        const drizzleState = this.$store.state.drizzle.store.getState();
+        const drizzleState = this.$drizzle.store.getState();
         const { transactions, transactionStack } = drizzleState;
         // console.log(transactions);
         // console.log(transactionStack);
