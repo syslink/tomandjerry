@@ -564,6 +564,9 @@ export default {
               .call()
               .then((catIds) => {
                 catIds.map((catId) => {
+                  if (Number(catId) == 0) {
+                    return;
+                  }
                   TomCatNFT.methods
                     .id2CatInfoMap(catId)
                     .call()

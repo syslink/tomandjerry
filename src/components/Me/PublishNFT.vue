@@ -244,13 +244,13 @@ export default {
           loading.close();
         }
       );
-      console.log(
-        this.createdCatName,
-        this.catPic,
-        motherId,
-        this.isBreeding,
-        this.accountAddr
-      );
+      // console.log(
+      //   this.createdCatName,
+      //   this.catPic,
+      //   motherId,
+      //   this.isBreeding,
+      //   this.accountAddr
+      // );
     },
     syncTxStatus(successCallback, failCallback) {
       const intervalId = setInterval(() => {
